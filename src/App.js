@@ -1,27 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
 import { useFeaturedBanners } from './utils/hooks/useFeaturedBanners';
+import Content from './templates/Content';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
   const { data, isLoading } = useFeaturedBanners();
   console.log(data, isLoading);
 
+  const theme = {
+    main: '#f27c2d',
+    darkGray: '#272727'
+  }
+
+  const page = 'homepage';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <ThemeProvider theme={theme}>
+        <Content page={page} />
+      </ThemeProvider>
     </div>
   );
 }
