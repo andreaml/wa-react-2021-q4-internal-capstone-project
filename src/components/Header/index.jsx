@@ -15,6 +15,7 @@ const Wrapper = styled.nav`
   position: sticky;
   top: 0;
   width: 100%;
+  z-index: 1;
 `
 
 const Logo = styled.img`
