@@ -60,7 +60,6 @@ const SlidesCounter = styled.span`
 
 const Slider = () => {
   const { data, isLoading } = useFeaturedBanners();
-  console.log(data, isLoading);
   const [ currentSlideIndex, setCurrentSlideIndex ] = useState(0);
   const [ currentSlide, setCurrentSlide ] = useState( {} );
 
