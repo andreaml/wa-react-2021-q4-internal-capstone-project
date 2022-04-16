@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useFeaturedBanners } from '../utils/hooks/useFeaturedBanners';
+import { LoadingBackgroundAnimation } from '../utils/scssMixins';
 
 const SliderWrapper = styled.div`
   position: relative;
 `
 
+const LoadingSlider = styled.div`
+  ${LoadingBackgroundAnimation({ aspectRatio: '96 / 47'})}
+  width: 100%;
+`
+
 const SliderImage = styled.img`
+  ${LoadingBackgroundAnimation({ aspectRatio: '96 / 47'})}
   width: 100%;
 `
 
@@ -88,7 +95,7 @@ const Slider = () => {
     }
   }
   if (isLoading) {
-    return (<h2>Loading content...</h2>);
+    return (<LoadingSlider title='Loading Slider...'/>);
   }
   return (
     <SliderWrapper>

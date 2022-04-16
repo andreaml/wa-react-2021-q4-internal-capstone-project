@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components';
 function App() {
   const theme = {
     main: '#f27c2d',
+    lightBackground: '#fffbf4',
+    loadingBackground: '#eeeeee',
     darkGray: '#272727'
   }
 
