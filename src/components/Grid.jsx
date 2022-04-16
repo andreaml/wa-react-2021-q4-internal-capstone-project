@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { productCategories } from '../assets/data/product-categories';
+import { LoadingBackgroundAnimation } from '../utils/scssMixins';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -26,7 +27,7 @@ const CategoryWrapper = styled.a`
 `
 
 const CategoryImage = styled.img`
-  // aspect-ratio: 621 / 398;
+  ${LoadingBackgroundAnimation({ aspectRatio: '621 / 398'})}
   margin-bottom: 2px;
   width: 100%;
 `
