@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Slider from '../components/Slider';
-import Grid from '../components/Grid';
+import CategoriesGrid from '../components/CategoriesGrid';
 
 const Home = styled.div`
 `
@@ -9,7 +9,7 @@ const Homepage = () => {
   return (
     <Home>
       <Slider />
-      <Grid />
+      <CategoriesGrid />
     </Home>
   )
 }

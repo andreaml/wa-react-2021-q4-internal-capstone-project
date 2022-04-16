@@ -52,14 +52,14 @@ const CategoryLinkText = styled.span`
   right: 0;
 `
 
-const Grid = () => {
+const CategoriesGrid = () => {
   const [ categories ] = useState(productCategories.results);
   return (
     <GridWrapper>
       { categories.map(({id, data}) => (
         <CategoryWrapper key={id} href="#" title={data.name}>
           <CategoryName>{data.name}</CategoryName>
-          <CategoryImage src={data.main_image.url} alt={data.main_image.alt} />
+          <CategoryImage src={data.main_image?.url} alt={data.main_image?.alt} />
           <CategoryLinkText>Watch more &rarr;</CategoryLinkText>
         </CategoryWrapper>
       ))}
@@ -67,4 +67,4 @@ const Grid = () => {
   )
 }
 
-export default Grid;
+export default CategoriesGrid;
