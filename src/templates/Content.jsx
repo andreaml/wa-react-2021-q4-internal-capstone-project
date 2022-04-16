@@ -8,10 +8,6 @@ const Wrapper = styled.div`
   }
 `
 
-const Something = styled.div`
-  height: 500px;
-`
-
 const contentComponents = {
   homepage: Homepage,
 };
@@ -23,7 +19,6 @@ const Content = ({ page, pageProps }) => {
     <Wrapper>
       <Header />
       <ContentToRender story={pageProps} />
-      <Something />
       <Footer />
     </Wrapper>
   )
