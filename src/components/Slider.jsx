@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useFeaturedBanners } from '../utils/hooks/useFeaturedBanners';
-import { LoadingBackgroundAnimation } from '../utils/scssMixins';
+import { device } from '../utils/scss/mediaQueries';
+import { LoadingBackgroundAnimation } from '../utils/scss/scssMixins';
 
 const SliderWrapper = styled.div`
   position: relative;
@@ -18,21 +19,39 @@ const SliderImage = styled.img`
 `
 
 const SliderTitle = styled.h1`
-  color: black;
   background-color: rgba(255, 255, 255, 0.8);
-  border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  font-size: 3rem;
+  border-top-right-radius: 3px;
+  color: black;
+  font-size: 1rem;
   left: 0;
-  padding: 15px 5% 15px 15px;
+  padding: 8px;
   position: absolute;
-  top: 30%;
+  top: 10%;
+
+  @media ${device.mobileL} { 
+    font-size: 1.5rem;
+  }
+  
+  @media ${device.tablet} { 
+    font-size: 2rem;
+    padding: 15px 5% 15px 15px;
+    top: 30%;
+  }
+
+  @media ${device.laptopL} { 
+    font-size: 3rem;
+  }
 `
 
 const ButtonsWrapper = styled.div`
   position: absolute;
   bottom: 3px;
-  left: 60vw;
+  left: 40vw;
+
+  @media ${device.tablet} { 
+    left: 60vw;
+  }
 `
 
 const SliderButton = styled.button`
@@ -42,6 +61,7 @@ const SliderButton = styled.button`
   cursor: pointer;
   height: 30px;
   text-align: center;
+  vertical-align: bottom;
   width: 40px;
 
   ${props => props.left && css`
@@ -53,6 +73,10 @@ const SliderButton = styled.button`
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   `}
+
+  @media ${device.tablet} { 
+    font-size: 1.5rem;
+  }
 `
 
 const SlidesCounter = styled.span`
@@ -63,6 +87,12 @@ const SlidesCounter = styled.span`
   height: 30px;
   margin-left: 15px;
   padding: 5px 10px;
+
+  @media ${device.tablet} { 
+    font-size: 1rem;
+    // height: 40px;
+    padding: 5px 20px;
+  }
 `
 
 const Slider = () => {

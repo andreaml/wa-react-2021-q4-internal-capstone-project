@@ -1,26 +1,35 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { featuredProducts } from '../assets/data/featured-products';
-import { LoadingBackgroundAnimation } from '../utils/scssMixins';
+import { device } from '../utils/scss/mediaQueries';
+import { LoadingBackgroundAnimation } from '../utils/scss/scssMixins';
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.lightBackground};
-  padding: 5vw 10vw 10vw;
+  padding: 20px 0;
   width: 100%;
+
+  @media ${device.tablet} {
+    padding: 50px 0;
+  }
 `
 
 const ProductsHeader = styled.h2`
   font-weight: 800;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 0;
   text-transform: uppercase;
 `
   
 const ProductsWrapper = styled.div`
   column-gap: 15px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 150px)) ;
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+  justify-content: center;
+  margin: 0 auto;
   row-gap: 40px;
+  row-gap: 20px;
+  width: 95vw;
 `
 
 const ProductWrapper = styled.a`

@@ -3,6 +3,7 @@ import SimpleLink from '../SimpleLink';
 import logo from './../../logo.png';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
+import { device } from '../../utils/scss/mediaQueries';
 
 const Wrapper = styled.footer`
   background-color: ${props => props.theme.darkGray};
@@ -12,18 +13,27 @@ const Wrapper = styled.footer`
 `
 
 const InnerWrapper = styled.div`
-  column-gap: 30px;
+  column-gap: 2rem;
   display: grid;
   font-size: 12px;
-  grid-template-columns: repeat(3, 1fr);
-  // grid-auto-columns: 1fr 1fr 1fr 100%;
-  // grid-auto-flow: column;
+  grid-template-areas: "brandInfo brandInfo"
+                       "directory contact"
+                       "copyright copyright";
   margin: 0 auto;
   max-width: 1500px;
-  width: 80vw;
+  row-gap: 2rem;
+  width: 90vw;
+
+  @media ${device.tablet} {
+    column-gap: 4rem;
+    grid-template-areas:  "brandInfo directory contact"
+                          "copyright copyright copyright";
+    grid-template-columns: repeat(3, auto);
+  }
 `
 
 const Section = styled.section`
+  grid-area: ${({gridArea}) => gridArea};
   text-align: left;
   p {
     line-height: 16px;
@@ -71,8 +81,7 @@ const ListItem = styled.li`
 `
 
 const Copyright = styled.p`
-  grid-column-start: 1;
-  grid-column-end: 4;
+  grid-area: copyright;
   text-align: left;
 `
 
@@ -80,18 +89,18 @@ const Footer = () => {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Section>
+        <Section gridArea='brandInfo'>
           <Logo src={logo} alt='Deco Choice' title='Deco Choice' />
           <p>Come discover Deco Choice with endless must-have styles at prices so low you won't believe it. And the best part? Our products are all backed by our Best Price Promise.</p>
         </Section>
-        <Section>
+        <Section gridArea='directory'>
           <SectionTitle>Directory</SectionTitle>
           <List>
             <ListItem><SimpleLink light small href='#' title='Categories'>Categories</SimpleLink></ListItem>
             <ListItem><SimpleLink light small href='#' title='Sale'>Sale</SimpleLink></ListItem>
           </List>
         </Section>
-        <Section>
+        <Section gridArea='contact'>
           <SectionTitle>Contact</SectionTitle>
           <List>
             <ListItem><span title='Contact number'><PhoneIcon />0740-22-28-66</span></ListItem>
