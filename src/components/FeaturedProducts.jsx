@@ -35,12 +35,12 @@ const ProductsWrapper = styled.div`
 const ProductWrapper = styled.a`
   background: white;
   border-radius: 8px;
+  box-shadow: 0px 7px 13px ${props => props.theme.loadingBackground};
   padding-bottom: 15px;
   position: relative;
+  text-align: center;
   text-decoration: none;
   transition: transform .5s; 
-  box-shadow: 0px 7px 13px ${props => props.theme.loadingBackground};
-  
 
   &:hover {
     transform: scale(1.04);
