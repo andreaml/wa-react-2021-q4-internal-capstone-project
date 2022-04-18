@@ -28,7 +28,7 @@ const Wrapper = styled.nav`
 
 const Logo = styled.img`
   display: block;
-  height: fit-content;
+  height: auto;
   max-width: 150px;
   min-width: 100px;
   width: 100%;

@@ -54,7 +54,7 @@ const Logo = styled.img`
   display: block;
   -webkit-filter: invert(1);
   filter: invert(1);
-  height: fit-content;
+  height: auto;
   margin-bottom: 25px;
   width: 150px;
 `;
