@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../SearchInput';
 import SimpleLink from '../SimpleLink';
-import logo from './../../logo.png';
+import logo from '../../logo.png';
 import ShoppingCartButton from './ShoppingCartButton';
-import { device } from '../../utils/scss/mediaQueries';
-import { useState } from 'react';
+import device from '../../utils/scss/mediaQueries';
 import HamburgerButton from './HamburgerButton';
 
 const Wrapper = styled.nav`
@@ -24,7 +24,7 @@ const Wrapper = styled.nav`
   @media ${device.tablet} {
     position: fixed;
   }
-`
+`;
 
 const Logo = styled.img`
   display: block;
@@ -32,7 +32,7 @@ const Logo = styled.img`
   max-width: 150px;
   min-width: 100px;
   width: 100%;
-`
+`;
 
 const List = styled.ul`
   display: flex;
@@ -42,11 +42,11 @@ const List = styled.ul`
   flex-grow: 2;
   justify-content: flex-end;
   padding: 0 10px;
-`
+`;
 
 const CategoriesList = styled(List)`
   background-color: white;
-  border-top: 1px solid ${props => props.theme.main};
+  border-top: 1px solid ${(props) => props.theme.main};
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -57,7 +57,8 @@ const CategoriesList = styled(List)`
   position: absolute;
   top: 60px;
   transition: transform 0.3s ease-in-out;
-  transform: ${({ expanded }) => expanded ? 'translateX(0)' : 'translateX(-100%)'};
+  transform: ${({ expanded }) =>
+    expanded ? 'translateX(0)' : 'translateX(-100%)'};
   width: 100%;
 
   @media ${device.tablet} {
@@ -69,7 +70,7 @@ const CategoriesList = styled(List)`
     transform: unset;
     width: auto;
   }
-`
+`;
 
 const ListItem = styled.li`
   margin: 0;
@@ -81,46 +82,61 @@ const ListItem = styled.li`
   @media ${device.tablet} {
     margin: 0 10px;
   }
-  
+
   ${CategoriesList} > &:hover {
-    background-color: ${props => props.theme.lightBackground};
+    background-color: ${(props) => props.theme.lightBackground};
     a {
-      color: ${props => props.theme.main};
+      color: ${(props) => props.theme.main};
     }
 
     @media ${device.tablet} {
       background-color: transparent;
     }
   }
-  
+
   ${SimpleLink} {
     display: block;
     padding: 10px 0;
     transition: inherit;
     width: 100%;
   }
-`
+`;
 
-const Header = () => {
-  const [ mobileNavbarIsExpanded, setMobileNavbarIsExpanded ] = useState(false);
+function Header() {
+  const [mobileNavbarIsExpanded, setMobileNavbarIsExpanded] = useState(false);
 
   const toggleMobileNavbar = () => {
     setMobileNavbarIsExpanded((currentExpandedValue) => !currentExpandedValue);
-  }
+  };
   return (
     <Wrapper>
-      <Logo src={logo} alt='Deco Choice' title='Deco Choice' />
+      <Logo src={logo} alt="Deco Choice" title="Deco Choice" />
       <CategoriesList expanded={mobileNavbarIsExpanded}>
-        <ListItem><SimpleLink uppercase href='#' title='Categories'>Categories</SimpleLink></ListItem>
-        <ListItem><SimpleLink uppercase href='#' title='Sale'>Sale</SimpleLink></ListItem>
+        <ListItem>
+          <SimpleLink uppercase href="#" title="Categories">
+            Categories
+          </SimpleLink>
+        </ListItem>
+        <ListItem>
+          <SimpleLink uppercase href="#" title="Sale">
+            Sale
+          </SimpleLink>
+        </ListItem>
       </CategoriesList>
       <List>
-        <ListItem><SearchInput /></ListItem>
-        <ListItem><ShoppingCartButton /></ListItem>
+        <ListItem>
+          <SearchInput />
+        </ListItem>
+        <ListItem>
+          <ShoppingCartButton />
+        </ListItem>
       </List>
-      <HamburgerButton onClick={toggleMobileNavbar} mobileNavbarIsExpanded={mobileNavbarIsExpanded} />
+      <HamburgerButton
+        onClick={toggleMobileNavbar}
+        mobileNavbarIsExpanded={mobileNavbarIsExpanded}
+      />
     </Wrapper>
-  )
+  );
 }
 
 export default Header;

@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -7,22 +9,31 @@ const Wrapper = styled.div`
   * {
     box-sizing: border-box;
   }
-`
+`;
 
 const contentComponents = {
   homepage: Homepage,
 };
 
-const Content = ({ page, pageProps }) => {
+function Content({ page, pageProps }) {
   const ContentToRender = contentComponents[page];
 
   return (
     <Wrapper>
       <Header />
-      <ContentToRender story={pageProps} />
+      <ContentToRender pageProps={pageProps} />
       <Footer />
     </Wrapper>
-  )
+  );
 }
+
+Content.propTypes = {
+  page: PropTypes.string.isRequired,
+  pageProps: PropTypes.instanceOf(Object),
+};
+
+Content.defaultProps = {
+  pageProps: {},
+};
 
 export default Content;

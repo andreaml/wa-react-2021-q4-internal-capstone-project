@@ -1,5 +1,7 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { device } from '../../utils/scss/mediaQueries';
+import device from '../../utils/scss/mediaQueries';
 
 const buttonSize = '25px';
 
@@ -12,25 +14,28 @@ const Line = styled.span`
   position: relative;
   transform-origin: 1px;
 
-  ${({ top }) => (
-    top && css`
-      transform: ${({ expanded }) => expanded ? 'rotate(45deg)' : 'rotate(0)'};
-    `
-  )}
+  ${({ top }) =>
+    top &&
+    css`
+      transform: ${({ expanded }) =>
+        expanded ? 'rotate(45deg)' : 'rotate(0)'};
+    `}
 
-  ${({ middle }) => (
-    middle && css`
-      opacity: ${({ expanded }) => expanded ? 0 : 1 };
-      transform: ${({ expanded }) => expanded ? 'translateX(20px)' : 'translateX(0)'};
-    `
-  )}
+  ${({ middle }) =>
+    middle &&
+    css`
+      opacity: ${({ expanded }) => (expanded ? 0 : 1)};
+      transform: ${({ expanded }) =>
+        expanded ? 'translateX(20px)' : 'translateX(0)'};
+    `}
 
-  ${({ bottom }) => (
-    bottom && css`
-      transform: ${({ expanded }) => expanded ? 'rotate(-45deg)' : 'rotate(0)'};
-    `
-  )}
-`
+  ${({ bottom }) =>
+    bottom &&
+    css`
+      transform: ${({ expanded }) =>
+        expanded ? 'rotate(-45deg)' : 'rotate(0)'};
+    `}
+`;
 
 const Button = styled.button`
   background: transparent;
@@ -51,20 +56,20 @@ const Button = styled.button`
 
   &:hover {
     ${Line} {
-      background: ${props => props.theme.main};
+      background: ${(props) => props.theme.main};
     }
   }
 
   @media ${device.tablet} {
     display: none;
   }
-`
+`;
 
-const HamburgerButton = ({ onClick, mobileNavbarIsExpanded }) => {
+function HamburgerButton({ onClick, mobileNavbarIsExpanded }) {
   return (
     <Button
-      type='button'
-      title='Toggle menu'
+      type="button"
+      title="Toggle menu"
       onClick={onClick}
       expanded={mobileNavbarIsExpanded}
       aria-expanded={mobileNavbarIsExpanded}
@@ -73,7 +78,12 @@ const HamburgerButton = ({ onClick, mobileNavbarIsExpanded }) => {
       <Line middle expanded={mobileNavbarIsExpanded} />
       <Line bottom expanded={mobileNavbarIsExpanded} />
     </Button>
-  )
+  );
 }
+
+HamburgerButton.propTypes = {
+  onClick: PropTypes.instanceOf(Function).isRequired,
+  mobileNavbarIsExpanded: PropTypes.bool.isRequired,
+};
 
 export default HamburgerButton;

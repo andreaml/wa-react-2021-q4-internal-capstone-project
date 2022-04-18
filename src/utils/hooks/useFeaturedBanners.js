@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../constants';
-import { useLatestAPI } from './useLatestAPI';
+import useLatestAPI from './useLatestAPI';
 
-export function useFeaturedBanners() {
+function useFeaturedBanners() {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
   const [featuredBanners, setFeaturedBanners] = useState(() => ({
     data: {},
@@ -33,6 +33,7 @@ export function useFeaturedBanners() {
         setFeaturedBanners({ data, isLoading: false });
       } catch (err) {
         setFeaturedBanners({ data: {}, isLoading: false });
+        // eslint-disable-next-line no-console
         console.error(err);
       }
     }
@@ -46,3 +47,5 @@ export function useFeaturedBanners() {
 
   return featuredBanners;
 }
+
+export default useFeaturedBanners;

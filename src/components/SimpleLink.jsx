@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const SimpleLink = styled.a`
   color: black;
@@ -10,17 +10,23 @@ const SimpleLink = styled.a`
     text-decoration: underline;
   }
 
-  ${props => props.light && css`
-    color: white;
-  `}
+  ${(props) =>
+    props.light &&
+    css`
+      color: white;
+    `}
 
-  ${props => props.small && css`
-    font-size: 12px;
-  `}
+  ${(props) =>
+    props.small &&
+    css`
+      font-size: 12px;
+    `}
 
-  ${props => props.uppercase && css`
-    text-transform: uppercase;
-  `}
+  ${(props) =>
+    props.uppercase &&
+    css`
+      text-transform: uppercase;
+    `}
 `;
 
 export default SimpleLink;

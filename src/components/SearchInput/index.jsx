@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 const Wrapper = styled.form`
   align-items: center;
@@ -12,7 +12,7 @@ const Wrapper = styled.form`
   top: 0;
   min-width: 30px;
   width: fit-content;
-`
+`;
 
 const Input = styled.input`
   border-radius: 3px;
@@ -26,13 +26,15 @@ const Input = styled.input`
   transition: all 0.2s linear;
   width: 0;
 
-  ${({expanded}) => expanded && css`
-    opacity: 1;
-    padding-left: 10px;
-    padding-right: 40px;
-    width: calc(80vw - 30px);
-  `}
-`
+  ${({ expanded }) =>
+    expanded &&
+    css`
+      opacity: 1;
+      padding-left: 10px;
+      padding-right: 40px;
+      width: calc(80vw - 30px);
+    `}
+`;
 
 const Button = styled.button`
   background-color: transparent;
@@ -51,45 +53,53 @@ const Button = styled.button`
 
   &:hover {
     svg path {
-      fill: ${props => props.theme.main};
+      fill: ${(props) => props.theme.main};
     }
   }
-`
+`;
 
-const SearchInput = () => {
-  const [ inputIsExpanded, setInputIsExpanded ] = useState(false);
-  const [ searchValue, setSearchValue ] = useState('');
-  const inputRef = useRef( null );
+function SearchInput() {
+  const [inputIsExpanded, setInputIsExpanded] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const inputRef = useRef(null);
 
   const toggleInputExpanded = () => {
     setInputIsExpanded((currentExpandedValue) => !currentExpandedValue);
-  }
+  };
 
   const search = (e) => {
     e.preventDefault();
     toggleInputExpanded();
-  }
-  
+  };
+
   const triggerSearchClickAction = (e) => {
     if (!inputIsExpanded) {
       e.preventDefault();
       inputRef.current.focus();
       toggleInputExpanded();
     }
-  }
+  };
 
   return (
     <Wrapper onSubmit={search}>
       <Input
         ref={inputRef}
-        type='text'
+        type="text"
         expanded={inputIsExpanded}
-        onChange={ (e) => { setSearchValue(e.target.value) } }
-        value={ searchValue }
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+        }}
+        value={searchValue}
       />
-      <Button type={inputIsExpanded ? 'submit' : 'button'} onClick={triggerSearchClickAction} title='Search'><SearchIcon alt='Search icon' /></Button>
+      <Button
+        type={inputIsExpanded ? 'submit' : 'button'}
+        onClick={triggerSearchClickAction}
+        title="Search"
+      >
+        <SearchIcon alt="Search icon" />
+      </Button>
     </Wrapper>
-  )
+  );
 }
 
 export default SearchInput;

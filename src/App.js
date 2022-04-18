@@ -1,6 +1,7 @@
-import Content from './templates/Content';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './utils/scss/theme';
+import Content from './templates/Content';
+import theme from './utils/scss/theme';
 
 function App() {
   const page = 'homepage';
