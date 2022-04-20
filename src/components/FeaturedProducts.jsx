@@ -104,7 +104,10 @@ function FeaturedProducts() {
 ProductCard.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string,
-    mainimage: PropTypes.string,
+    mainimage: PropTypes.shape({
+      url: PropTypes.string,
+      alt: PropTypes.string,
+    }),
     price: PropTypes.number,
     category: PropTypes.shape({
       slug: PropTypes.string,
