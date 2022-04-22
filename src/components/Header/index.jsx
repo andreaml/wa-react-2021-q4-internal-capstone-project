@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Logo from '../Logo';
 import SearchInput from '../SearchInput';
 import StyledSimpleLink from '../SimpleLink.styled';
-import logo from '../../logo.png';
 import ShoppingCartButton from './ShoppingCartButton';
 import device from '../../utils/scss/mediaQueries';
 import HamburgerButton from './HamburgerButton';
@@ -24,14 +24,6 @@ const Wrapper = styled.nav`
   @media ${device.tablet} {
     position: fixed;
   }
-`;
-
-const Logo = styled.img`
-  display: block;
-  height: auto;
-  max-width: 150px;
-  min-width: 100px;
-  width: 100%;
 `;
 
 const List = styled.ul`
@@ -110,7 +102,7 @@ function Header() {
   };
   return (
     <Wrapper>
-      <Logo src={logo} alt="Deco Choice" title="Deco Choice" />
+      <Logo />
       <CategoriesList expanded={mobileNavbarIsExpanded}>
         <ListItem>
           <StyledSimpleLink uppercase href="#" title="Categories">
