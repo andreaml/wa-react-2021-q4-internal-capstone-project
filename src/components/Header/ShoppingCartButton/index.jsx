@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as ShoppingCartIcon } from '../../../assets/icons/shopping-cart.svg';
-import { StyledButton } from '../HamburgerButton/styled';
+import StyledButton from './styled';
 
 function ShoppingCartButton() {
   return (
