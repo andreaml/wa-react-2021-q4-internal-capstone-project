@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
-
-const SimpleLink = styled.a`
+// Question: If I create a single file styled component, how should I name the file?
+// ((StyledComponent.styled.js or Component.styled.js))
+// And how to export its component name? ((StyledComponent or Component))
+const StyledSimpleLink = styled.a`
   color: black;
   font-size: 14px;
   letter-spacing: 1px;
@@ -29,4 +31,4 @@ const SimpleLink = styled.a`
     `}
 `;
 
-export default SimpleLink;
+export default StyledSimpleLink;

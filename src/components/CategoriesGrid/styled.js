@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
-import productCategories from '../assets/data/product-categories';
-import device from '../utils/scss/mediaQueries';
-import LoadingBackgroundAnimation from '../utils/scss/scssMixins';
+import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
+import device from '../../utils/scss/mediaQueries';
 
 const columnGap = 20;
 
 const gridWrapperWidth = 95;
 
-const Wrapper = styled.div`
+export const StyledWrapper = styled.div`
   margin: 20px auto;
   width: 100%;
 
@@ -17,7 +15,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const CategoriesHeader = styled.h2`
+export const StyledCategoriesHeader = styled.h2`
   font-weight: 800;
   margin-bottom: 20px;
   margin-top: 0;
@@ -25,7 +23,7 @@ const CategoriesHeader = styled.h2`
   text-transform: uppercase;
 `;
 
-const CategoriesWrapper = styled.div`
+export const StyledCategoriesWrapper = styled.div`
   column-gap: ${columnGap}px;
   display: flex;
   flex-flow: row wrap;
@@ -35,7 +33,7 @@ const CategoriesWrapper = styled.div`
   width: ${gridWrapperWidth}vw;
 `;
 
-const CategoryWrapper = styled.a`
+export const StyledCategoryWrapper = styled.a`
   background: ${(props) => props.theme.main};
   flex-grow: 0;
   flex-shrink: 1;
@@ -58,13 +56,13 @@ const CategoryWrapper = styled.a`
   }
 `;
 
-const CategoryImage = styled.img`
+export const StyledCategoryImage = styled.img`
   ${LoadingBackgroundAnimation({ aspectRatio: '621 / 398' })}
   margin-bottom: 2px;
   width: 100%;
 `;
 
-const CategoryName = styled.h3`
+export const StyledCategoryName = styled.h3`
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
@@ -82,7 +80,7 @@ const CategoryName = styled.h3`
   }
 `;
 
-const CategoryLinkText = styled.span`
+export const StyledCategoryLinkText = styled.span`
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 5px;
   color: white;
@@ -91,26 +89,3 @@ const CategoryLinkText = styled.span`
   position: absolute;
   right: 0;
 `;
-
-function CategoriesGrid() {
-  const [categories] = useState(productCategories.results);
-  return (
-    <Wrapper>
-      <CategoriesHeader>Categories</CategoriesHeader>
-      <CategoriesWrapper>
-        {categories.map(({ id, data }) => (
-          <CategoryWrapper key={id} href="#" title={data.name}>
-            <CategoryName>{data.name}</CategoryName>
-            <CategoryImage
-              src={data.main_image?.url}
-              alt={data.main_image?.alt}
-            />
-            <CategoryLinkText>Watch more &rarr;</CategoryLinkText>
-          </CategoryWrapper>
-        ))}
-      </CategoriesWrapper>
-    </Wrapper>
-  );
-}
-
-export default CategoriesGrid;
