@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 // import Homepage from './templates/Homepage';
 // import ProductList from './templates/ProductList';
 import theme from './utils/scss/theme';
-import Content from './templates/Content';
+import Content from './pages/Content';
 
 const StyledWrapper = styled.div`
   * {
