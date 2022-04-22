@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../SearchInput';
-import SimpleLink from '../SimpleLink';
+import StyledSimpleLink from '../SimpleLink.styled';
 import logo from '../../logo.png';
 import ShoppingCartButton from './ShoppingCartButton';
 import device from '../../utils/scss/mediaQueries';
@@ -94,7 +94,7 @@ const ListItem = styled.li`
     }
   }
 
-  ${SimpleLink} {
+  ${StyledSimpleLink} {
     display: block;
     padding: 10px 0;
     transition: inherit;
@@ -113,14 +113,14 @@ function Header() {
       <Logo src={logo} alt="Deco Choice" title="Deco Choice" />
       <CategoriesList expanded={mobileNavbarIsExpanded}>
         <ListItem>
-          <SimpleLink uppercase href="#" title="Categories">
+          <StyledSimpleLink uppercase href="#" title="Categories">
             Categories
-          </SimpleLink>
+          </StyledSimpleLink>
         </ListItem>
         <ListItem>
-          <SimpleLink uppercase href="#" title="Sale">
+          <StyledSimpleLink uppercase href="#" title="Sale">
             Sale
-          </SimpleLink>
+          </StyledSimpleLink>
         </ListItem>
       </CategoriesList>
       <List>

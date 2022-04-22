@@ -1,11 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import device from '../../utils/scss/mediaQueries';
+import device from '../../../utils/scss/mediaQueries';
 
 const buttonSize = '25px';
 
-const Line = styled.span`
+export const StyledLine = styled.span`
   width: ${buttonSize};
   height: 2px;
   border-radius: 10px;
@@ -37,7 +35,7 @@ const Line = styled.span`
     `}
 `;
 
-const Button = styled.button`
+export const StyledButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
@@ -55,7 +53,7 @@ const Button = styled.button`
   }
 
   &:hover {
-    ${Line} {
+    ${StyledLine} {
       background: ${(props) => props.theme.main};
     }
   }
@@ -64,26 +62,3 @@ const Button = styled.button`
     display: none;
   }
 `;
-
-function HamburgerButton({ onClick, mobileNavbarIsExpanded }) {
-  return (
-    <Button
-      type="button"
-      title="Toggle menu"
-      onClick={onClick}
-      expanded={mobileNavbarIsExpanded}
-      aria-expanded={mobileNavbarIsExpanded}
-    >
-      <Line top expanded={mobileNavbarIsExpanded} />
-      <Line middle expanded={mobileNavbarIsExpanded} />
-      <Line bottom expanded={mobileNavbarIsExpanded} />
-    </Button>
-  );
-}
-
-HamburgerButton.propTypes = {
-  onClick: PropTypes.instanceOf(Function).isRequired,
-  mobileNavbarIsExpanded: PropTypes.bool.isRequired,
-};
-
-export default HamburgerButton;
