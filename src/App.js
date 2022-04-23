@@ -1,10 +1,8 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { PageProvider /* usePage */ } from './utils/hooks/PageContext';
+import { PageProvider } from './utils/hooks/PageContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import Homepage from './templates/Homepage';
-// import ProductList from './templates/ProductList';
 import theme from './utils/scss/theme';
 import Content from './pages/Content';
 
