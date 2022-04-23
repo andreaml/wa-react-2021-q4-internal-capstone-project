@@ -10,7 +10,6 @@ const contentComponents = {
 
 function Content() {
   const { page } = usePage();
-  console.log(page);
   const ContentToRender = contentComponents[page];
 
   return <ContentToRender />;

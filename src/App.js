@@ -15,9 +15,6 @@ const StyledWrapper = styled.div`
 `;
 
 function App() {
-  // const value = usePage();
-  // console.log(value);
-
   return (
     <ThemeProvider theme={theme}>
       <PageProvider page="homepage">
