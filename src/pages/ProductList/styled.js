@@ -7,8 +7,10 @@ export const StyledProductList = styled.div`
   display: grid;
   grid-template-areas:
     'headline headline'
-    'sidebar productsGrid';
+    'sidebar productsGrid'
+    'sidebar pagination';
   grid-template-columns: 200px 1fr;
+  padding-bottom: 50px;
 
   @media ${device.tablet} {
     margin-top: 60px;

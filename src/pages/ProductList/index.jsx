@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import products from '../../assets/data/products';
+import Pagination from '../../components/Pagination';
 import ProductsGrid from '../../components/ProductsGrid';
 import Sidebar from '../../components/Sidebar';
 import useFilters from '../../utils/hooks/useFilters';
@@ -44,6 +45,9 @@ function ProductList() {
         handleCategoriesFilterChange={handleCategoriesFilterChange}
       />
       <ProductsGrid isLoading={isLoading} products={filteredProducts} />
+      {!isLoading && filteredProducts.length && (
+        <Pagination page={products.page} totalPages={products.total_pages} />
+      )}
     </StyledProductList>
   );
 }
