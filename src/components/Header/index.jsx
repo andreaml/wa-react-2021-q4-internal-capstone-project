@@ -19,7 +19,7 @@ const Wrapper = styled.nav`
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 
   @media ${device.tablet} {
     position: fixed;

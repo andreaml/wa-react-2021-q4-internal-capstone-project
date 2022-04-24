@@ -4,6 +4,7 @@ import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 export const StyledWrapper = styled.div`
   grid-area: productsGrid;
   padding: 20px 40px;
+  text-align: center;
   width: 100%;
 `;
 

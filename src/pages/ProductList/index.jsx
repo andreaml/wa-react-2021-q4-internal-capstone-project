@@ -45,7 +45,7 @@ function ProductList() {
         handleCategoriesFilterChange={handleCategoriesFilterChange}
       />
       <ProductsGrid isLoading={isLoading} products={filteredProducts} />
-      {!isLoading && filteredProducts.length && (
+      {!isLoading && filteredProducts.length !== 0 && (
         <Pagination page={products.page} totalPages={products.total_pages} />
       )}
     </StyledProductList>
