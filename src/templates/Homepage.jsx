@@ -1,18 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import Slider from '../components/Slider';
 import CategoriesGrid from '../components/CategoriesGrid';
 import FeaturedProducts from '../components/FeaturedProducts';
-
-const Home = styled.div``;
+import productCategories from '../assets/data/product-categories';
+import featuredProducts from '../assets/data/featured-products';
 
 function Homepage() {
   return (
-    <Home>
+    <div>
       <Slider />
-      <CategoriesGrid />
-      <FeaturedProducts />
-    </Home>
+      <CategoriesGrid categories={productCategories.results} />
+      <FeaturedProducts products={featuredProducts.results} />
+    </div>
   );
 }
 
