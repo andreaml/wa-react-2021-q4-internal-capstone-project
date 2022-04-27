@@ -1,11 +1,10 @@
 import { css } from 'styled-components';
 
-const LoadingBackgroundAnimation = () => css`
-  ${(props) =>
-    props.aspectRatio &&
-    css`
-      aspect-ratio: ${props.aspectRatio};
-    `}
+const LoadingBackgroundAnimation = ({ aspectRatio = null } = {}) => css`
+  ${aspectRatio &&
+  css`
+    aspect-ratio: ${aspectRatio};
+  `}
   background: ${(props) => props.theme.loadingBackground};
   background: linear-gradient(
     110deg,
