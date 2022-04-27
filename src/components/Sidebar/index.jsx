@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import productCategories from '../../assets/data/product-categories';
 import { ReactComponent as FilterIcon } from '../../assets/icons/filter.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 import {
@@ -13,7 +12,11 @@ import {
   StyledFilterButton,
 } from './styled';
 
-function Sidebar({ categoriesFilter, handleCategoriesFilterChange }) {
+function Sidebar({
+  productCategories,
+  categoriesFilter,
+  handleCategoriesFilterChange,
+}) {
   const [mobileFilterIsExpanded, setMobileFilterIsExpanded] = useState(false);
 
   const toggleMobileFilter = () => {
@@ -33,7 +36,7 @@ function Sidebar({ categoriesFilter, handleCategoriesFilterChange }) {
           </StyledCloseButton>
         </StyledFilterTitle>
         <StyledSidebarItemsWrapper>
-          {productCategories.results.map(({ id, data }) => {
+          {productCategories.map(({ id, data }) => {
             const checked = categoriesFilter.includes(id);
             return (
               <li key={id}>
@@ -58,6 +61,14 @@ function Sidebar({ categoriesFilter, handleCategoriesFilterChange }) {
 }
 
 Sidebar.propTypes = {
+  productCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      data: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+    })
+  ).isRequired,
   categoriesFilter: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleCategoriesFilterChange: PropTypes.instanceOf(Function).isRequired,
 };

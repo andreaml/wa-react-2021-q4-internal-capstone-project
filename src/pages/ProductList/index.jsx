@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import products from '../../assets/data/products';
+import productCategories from '../../assets/data/product-categories';
 import Pagination from '../../components/Pagination';
 import ProductsGrid from '../../components/ProductsGrid';
 import Sidebar from '../../components/Sidebar';
@@ -41,6 +42,7 @@ function ProductList() {
     <StyledProductList>
       <StyledTitle>Products catalog</StyledTitle>
       <Sidebar
+        productCategories={productCategories.results}
         categoriesFilter={categoriesFilter}
         handleCategoriesFilterChange={handleCategoriesFilterChange}
       />
