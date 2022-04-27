@@ -3,7 +3,7 @@ import device from '../../utils/scss/mediaQueries';
 
 export const StyledWrapper = styled.div`
   background-color: ${(props) => props.theme.lightBackground};
-  padding: 20px 0;
+  padding: 20px 0 50px 0;
   width: 100%;
 
   @media ${device.tablet} {
@@ -24,7 +24,7 @@ export const StyledProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   row-gap: 40px;
   row-gap: 20px;
   width: 95vw;

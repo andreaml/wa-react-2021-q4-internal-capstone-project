@@ -1,5 +1,6 @@
 const theme = {
   main: '#f27c2d',
+  darkMain: 'orangered',
   lightBackground: '#fffbf4',
   loadingBackground: '#eeeeee',
   mediumGray: '#d5d5d5',

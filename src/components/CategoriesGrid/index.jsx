@@ -11,7 +11,6 @@ import {
 } from './styled';
 
 function CategoriesGrid({ categories }) {
-  // const [categories] = useState(productCategories.results);
   return (
     <StyledWrapper>
       <StyledCategoriesHeader>Categories</StyledCategoriesHeader>

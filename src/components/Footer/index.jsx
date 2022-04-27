@@ -1,6 +1,6 @@
 import React from 'react';
 import StyledSimpleLink from '../SimpleLink.styled';
-import logo from '../../logo.png';
+import Logo from '../Logo';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import {
@@ -8,7 +8,6 @@ import {
   StyledInnerWrapper,
   StyledList,
   StyledListItem,
-  StyledLogo,
   StyledSection,
   StyledSectionTitle,
   StyledWrapper,
@@ -20,7 +19,7 @@ function Footer() {
     <StyledWrapper>
       <StyledInnerWrapper>
         <StyledSection gridArea="brandInfo">
-          <StyledLogo src={logo} alt="Deco Choice" title="Deco Choice" />
+          <Logo footer />
           <p>
             Come discover Deco Choice with endless must-have styles at prices so
             low you won&apos;t believe it. And the best part? Our products are
