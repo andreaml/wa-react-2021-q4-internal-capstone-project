@@ -58,6 +58,7 @@ Sidebar.propTypes = {
     PropTypes.shape({
       id: PropTypes.string,
       data: PropTypes.shape({
+        active: PropTypes.bool,
         name: PropTypes.string,
       }),
     })
