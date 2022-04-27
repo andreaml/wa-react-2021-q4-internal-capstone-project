@@ -20,30 +20,16 @@ function ProductList() {
   }, []);
 
   const {
-    filter: categoriesFilter,
+    filter: mappedCategories,
+    filteredProducts,
     handleFilterChange: handleCategoriesFilterChange,
-  } = useFilters([]);
-
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  useEffect(() => {
-    if (!isLoading) {
-      if (categoriesFilter.length) {
-        const newFilteredProducts = products.results.filter((product) =>
-          categoriesFilter.includes(product.data?.category?.id)
-        );
-        setFilteredProducts(newFilteredProducts);
-      } else {
-        setFilteredProducts(products.results);
-      }
-    }
-  }, [categoriesFilter, isLoading]);
+  } = useFilters(productCategories.results, products.results);
 
   return (
     <StyledProductList>
       <StyledTitle>Products catalog</StyledTitle>
       <Sidebar
-        productCategories={productCategories.results}
-        categoriesFilter={categoriesFilter}
+        productCategories={mappedCategories}
         handleCategoriesFilterChange={handleCategoriesFilterChange}
       />
       <ProductsGrid isLoading={isLoading} products={filteredProducts} />

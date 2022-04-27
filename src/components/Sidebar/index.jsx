@@ -12,11 +12,7 @@ import {
   StyledFilterButton,
 } from './styled';
 
-function Sidebar({
-  productCategories,
-  categoriesFilter,
-  handleCategoriesFilterChange,
-}) {
+function Sidebar({ productCategories, handleCategoriesFilterChange }) {
   const [mobileFilterIsExpanded, setMobileFilterIsExpanded] = useState(false);
 
   const toggleMobileFilter = () => {
@@ -36,24 +32,21 @@ function Sidebar({
           </StyledCloseButton>
         </StyledFilterTitle>
         <StyledSidebarItemsWrapper>
-          {productCategories.map(({ id, data }) => {
-            const checked = categoriesFilter.includes(id);
-            return (
-              <li key={id}>
-                <StyledSidebarItemSelector checked={checked}>
-                  <input
-                    type="checkbox"
-                    value={id}
-                    checked={checked}
-                    onChange={() => {
-                      handleCategoriesFilterChange(id);
-                    }}
-                  />
-                  {data.name}
-                </StyledSidebarItemSelector>
-              </li>
-            );
-          })}
+          {productCategories.map(({ id, data }) => (
+            <li key={id}>
+              <StyledSidebarItemSelector checked={data.active}>
+                <input
+                  type="checkbox"
+                  value={id}
+                  checked={data.active}
+                  onChange={() => {
+                    handleCategoriesFilterChange(id);
+                  }}
+                />
+                {data.name}
+              </StyledSidebarItemSelector>
+            </li>
+          ))}
         </StyledSidebarItemsWrapper>
       </StyledContentWrapper>
     </StyledWrapper>
@@ -69,7 +62,6 @@ Sidebar.propTypes = {
       }),
     })
   ).isRequired,
-  categoriesFilter: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleCategoriesFilterChange: PropTypes.instanceOf(Function).isRequired,
 };
 

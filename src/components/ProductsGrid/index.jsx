@@ -20,9 +20,8 @@ function ProductsGrid({ isLoading, products }) {
             <p>No products found with the selected filters</p>
           </StyledNoResults>
         )}
-        {products.map(({ id, data }) => (
-          <ProductCard key={id} data={data} />
-        ))}
+        {!isLoading &&
+          products.map(({ id, data }) => <ProductCard key={id} data={data} />)}
       </StyledProductsWrapper>
     </StyledWrapper>
   );
