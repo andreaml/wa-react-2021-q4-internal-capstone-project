@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import products from '../../assets/data/products';
 import Pagination from '../../components/Pagination';
 import ProductsGrid from '../../components/ProductsGrid';
 import Sidebar from '../../components/Sidebar';
 import useFilters from '../../utils/hooks/useFilters';
 import useProductCategories from '../../utils/hooks/useProductCategories';
+import useProducts from '../../utils/hooks/useProducts';
 import { StyledProductList, StyledTitle } from './styled';
 
 function ProductList() {
-  const { data: productCategories, isLoading: isProductCategoriesLoading } =
+  const { data: productCategories, isLoading: isLoadingProductCategories } =
     useProductCategories();
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: products, isLoading: isLoadingProducts } = useProducts();
   const [searchParams] = useSearchParams();
   const defaultCategory = searchParams.get('category');
-
-  useEffect(() => {
-    const loadingTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => {
-      clearTimeout(loadingTimeout);
-    };
-  }, []);
 
   const {
     filter: mappedCategories,
@@ -30,7 +21,7 @@ function ProductList() {
     handleFilterChange: handleCategoriesFilterChange,
   } = useFilters(
     productCategories.results || [],
-    products.results,
+    products.results || [],
     defaultCategory
   );
 
@@ -39,11 +30,11 @@ function ProductList() {
       <StyledTitle>Products catalog</StyledTitle>
       <Sidebar
         productCategories={mappedCategories}
-        isLoading={isProductCategoriesLoading}
+        isLoading={isLoadingProductCategories}
         handleCategoriesFilterChange={handleCategoriesFilterChange}
       />
-      <ProductsGrid isLoading={isLoading} products={filteredProducts} />
-      {!isLoading && filteredProducts.length !== 0 && (
+      <ProductsGrid isLoading={isLoadingProducts} products={filteredProducts} />
+      {!isLoadingProducts && filteredProducts.length !== 0 && (
         <Pagination page={products.page} totalPages={products.total_pages} />
       )}
     </StyledProductList>
