@@ -25,6 +25,7 @@ export const StyledCategoriesHeader = styled.h2`
 `;
 
 export const StyledCategoriesWrapper = styled.div`
+  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
   column-gap: ${columnGap}px;
   display: flex;
   flex-flow: row wrap;
@@ -33,7 +34,6 @@ export const StyledCategoriesWrapper = styled.div`
   min-height: 40vh;
   row-gap: 20px;
   width: ${gridWrapperWidth}vw;
-  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
 `;
 
 export const StyledCategoryWrapper = styled(Link)`

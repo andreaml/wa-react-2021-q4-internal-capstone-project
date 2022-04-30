@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   StyledCategoryImage,
   StyledProductCategoryName,
@@ -7,26 +8,41 @@ import {
   StyledProductPrice,
   StyledProductWrapper,
 } from './styled';
+import StyledButton from '../StyledButton';
 
 function ProductCard({ data }) {
   return (
-    <StyledProductWrapper href="#" title={data.name}>
-      <StyledCategoryImage
-        src={data.mainimage?.url}
-        alt={data.mainimage?.alt}
-      />
-      <StyledProductName>{data.name}</StyledProductName>
+    <StyledProductWrapper title={data.name}>
+      <Link to={`/product/${data.sku}`}>
+        <StyledCategoryImage
+          src={data.mainimage?.url}
+          alt={data.mainimage?.alt}
+        />
+        <StyledProductName>{data.name}</StyledProductName>
+      </Link>
       <StyledProductPrice>${data.price}</StyledProductPrice>
       <StyledProductCategoryName>
-        {data.category?.slug}
+        {data.category?.name || data.category?.slug}
       </StyledProductCategoryName>
+      <br />
+      <StyledButton
+        type="button"
+        main
+        onClick={() => {
+          console.log('add product to cart');
+        }}
+      >
+        Add to Cart
+      </StyledButton>
     </StyledProductWrapper>
   );
 }
 
 ProductCard.propTypes = {
   data: PropTypes.shape({
+    sku: PropTypes.string,
     category: PropTypes.shape({
+      name: PropTypes.string,
       slug: PropTypes.string,
     }),
     name: PropTypes.string,

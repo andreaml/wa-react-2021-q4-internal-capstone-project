@@ -2,12 +2,14 @@ import React from 'react';
 import Slider from '../components/Slider';
 import CategoriesGrid from '../components/CategoriesGrid';
 import FeaturedProducts from '../components/FeaturedProducts';
-import featuredProducts from '../assets/data/featured-products';
 import useProductCategories from '../utils/hooks/useProductCategories';
+import useProducts from '../utils/hooks/useProducts';
 
 function Homepage() {
   const { data: productCategories, isLoading: isProductCategoriesLoading } =
     useProductCategories();
+  const { data: featuredProducts, isLoading: isLoadingFeaturedProducts } =
+    useProducts(['Featured']);
 
   return (
     <div>
@@ -16,7 +18,10 @@ function Homepage() {
         categories={productCategories.results || []}
         isLoading={isProductCategoriesLoading}
       />
-      <FeaturedProducts products={featuredProducts.results} />
+      <FeaturedProducts
+        products={featuredProducts.results}
+        isLoading={isLoadingFeaturedProducts}
+      />
     </div>
   );
 }

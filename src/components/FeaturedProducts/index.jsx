@@ -8,14 +8,13 @@ import {
 import ProductCard from '../ProductCard';
 import StyledButtonLink from '../StyledButtonLink';
 
-function FeaturedProducts({ products }) {
+function FeaturedProducts({ products, isLoading }) {
   return (
-    <StyledWrapper>
+    <StyledWrapper isLoading={isLoading}>
       <StyledProductsHeader>Featured&nbsp;&nbsp;Products</StyledProductsHeader>
       <StyledProductsWrapper>
-        {products.map(({ id, data }) => (
-          <ProductCard key={id} data={data} />
-        ))}
+        {!isLoading &&
+          products.map(({ id, data }) => <ProductCard key={id} data={data} />)}
       </StyledProductsWrapper>
       <StyledButtonLink main="true" center="true" to="/products">
         View all products
@@ -32,7 +31,12 @@ FeaturedProducts.propTypes = {
       price: PropTypes.number,
       slug: PropTypes.string,
     })
-  ).isRequired,
+  ),
+  isLoading: PropTypes.bool.isRequired,
+};
+
+FeaturedProducts.defaultProps = {
+  products: [],
 };
 
 export default FeaturedProducts;

@@ -9,6 +9,7 @@ export const StyledWrapper = styled.div`
 `;
 
 export const StyledProductsWrapper = styled.div`
+  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
   column-gap: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
@@ -17,7 +18,6 @@ export const StyledProductsWrapper = styled.div`
   row-gap: 40px;
   row-gap: 20px;
   min-height: calc(100vh - 431px);
-  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
 `;
 
 export const StyledNoResults = styled.div`
