@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import device from '../../utils/scss/mediaQueries';
+import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 
 export const StyledWrapper = styled.aside`
   background-color: white;
@@ -9,15 +10,16 @@ export const StyledWrapper = styled.aside`
   margin-bottom: 20px;
 
   @media ${device.tablet} {
-    height: fit-content;
+    min-height: 30vh;
     margin-bottom: 0;
   }
 `;
 
 export const StyledContentWrapper = styled.div`
-  background-color: inherit;
+  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
   border-top: 1px solid ${(props) => props.theme.mediumGray};
   box-shadow: 1px 7px 9px ${(props) => props.theme.mediumGray};
+  min-height: 30vh;
   position: absolute;
   top: 60px;
   transition: transform 0.3s ease-in-out;
@@ -61,7 +63,8 @@ export const StyledFilterButton = styled.button`
 
 export const StyledFilterTitle = styled.h3`
   color: ${(props) => props.theme.main};
-  padding: 0 15px;
+  margin: 0;
+  padding: 15px 15px 0 15px;
 `;
 
 export const StyledCloseButton = styled.button`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 import device from '../../utils/scss/mediaQueries';
 
@@ -29,11 +30,13 @@ export const StyledCategoriesWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   margin: 0 auto;
+  min-height: 40vh;
   row-gap: 20px;
   width: ${gridWrapperWidth}vw;
+  ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
 `;
 
-export const StyledCategoryWrapper = styled.a`
+export const StyledCategoryWrapper = styled(Link)`
   background: ${(props) => props.theme.main};
   flex-grow: 0;
   flex-shrink: 1;

@@ -12,7 +12,11 @@ import {
   StyledFilterButton,
 } from './styled';
 
-function Sidebar({ productCategories, handleCategoriesFilterChange }) {
+function Sidebar({
+  productCategories,
+  isLoading,
+  handleCategoriesFilterChange,
+}) {
   const [mobileFilterIsExpanded, setMobileFilterIsExpanded] = useState(false);
 
   const toggleMobileFilter = () => {
@@ -24,7 +28,10 @@ function Sidebar({ productCategories, handleCategoriesFilterChange }) {
         <FilterIcon />
         <span>Filters</span>
       </StyledFilterButton>
-      <StyledContentWrapper expanded={mobileFilterIsExpanded}>
+      <StyledContentWrapper
+        expanded={mobileFilterIsExpanded}
+        isLoading={isLoading}
+      >
         <StyledFilterTitle>
           Categories
           <StyledCloseButton type="button" onClick={toggleMobileFilter}>
@@ -44,7 +51,6 @@ function Sidebar({ productCategories, handleCategoriesFilterChange }) {
                     handleCategoriesFilterChange(id);
                   }}
                 />
-                {active && 'selected'}
                 {data.name}
               </StyledSidebarItemSelector>
             </li>
@@ -66,6 +72,7 @@ Sidebar.propTypes = {
     })
   ).isRequired,
   handleCategoriesFilterChange: PropTypes.instanceOf(Function).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Sidebar;

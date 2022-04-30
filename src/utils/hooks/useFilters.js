@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react';
 
 function useFilters(filterValues, products, defaultCategory) {
-  const [filter, setFilter] = useState(() =>
+  const initializeFilterArray = () =>
     filterValues.map((filterValueItem) => ({
       ...filterValueItem,
       active: filterValueItem.data.name === defaultCategory,
-    }))
-  );
+    }));
+
+  const initializeFilteredValuesTrackingArray = () =>
+    filterValues
+      .filter(
+        (filterItemValue) => filterItemValue.data.name === defaultCategory
+      )
+      .map(({ id }) => id);
+
+  const [filter, setFilter] = useState(initializeFilterArray);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  // lazy - initialization
   const [filteredValuesTrackingArray, setFilteredValuesTrackingArray] =
-    useState(() =>
-      filterValues
-        .filter(
-          (filterItemValue) => filterItemValue.data.name === defaultCategory
-        )
-        .map(({ id }) => id)
-    );
+    useState(initializeFilteredValuesTrackingArray);
+
+  useEffect(() => {
+    if (filterValues.length > 0) {
+      setFilter(initializeFilterArray);
+      setFilteredValuesTrackingArray(initializeFilteredValuesTrackingArray);
+    }
+  }, [filterValues]);
 
   const handleFilterChange = (selectedValue) => {
     if (filteredValuesTrackingArray.includes(selectedValue)) {
