@@ -32,17 +32,19 @@ function Sidebar({ productCategories, handleCategoriesFilterChange }) {
           </StyledCloseButton>
         </StyledFilterTitle>
         <StyledSidebarItemsWrapper>
-          {productCategories.map(({ id, data }) => (
+          {productCategories.map(({ id, data, active }) => (
             <li key={id}>
-              <StyledSidebarItemSelector checked={data.active}>
+              <StyledSidebarItemSelector checked={active}>
                 <input
+                  name="categoryFilters"
                   type="checkbox"
                   value={id}
-                  checked={data.active}
+                  checked={active}
                   onChange={() => {
                     handleCategoriesFilterChange(id);
                   }}
                 />
+                {active && 'selected'}
                 {data.name}
               </StyledSidebarItemSelector>
             </li>

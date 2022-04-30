@@ -7,10 +7,8 @@ import {
 } from './styled';
 import ProductCard from '../ProductCard';
 import StyledButtonLink from '../StyledButtonLink';
-import { usePage } from '../../utils/hooks/PageContext';
 
 function FeaturedProducts({ products }) {
-  const { setCurrentPage } = usePage();
   return (
     <StyledWrapper>
       <StyledProductsHeader>Featured&nbsp;&nbsp;Products</StyledProductsHeader>
@@ -19,12 +17,7 @@ function FeaturedProducts({ products }) {
           <ProductCard key={id} data={data} />
         ))}
       </StyledProductsWrapper>
-      <StyledButtonLink
-        main
-        onClick={() => {
-          setCurrentPage('plp');
-        }}
-      >
+      <StyledButtonLink main="true" center="true" to="/products">
         View all products
       </StyledButtonLink>
     </StyledWrapper>

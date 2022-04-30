@@ -1,43 +1,54 @@
 import { useState, useEffect } from 'react';
 
-function useFilters(filterValues, products) {
-  const [filter, setFilter] = useState(filterValues);
+function useFilters(filterValues, products, defaultCategory) {
+  const [filter, setFilter] = useState(() =>
+    filterValues.map((filterValueItem) => ({
+      ...filterValueItem,
+      active: filterValueItem.data.name === defaultCategory,
+    }))
+  );
   const [filteredProducts, setFilteredProducts] = useState(products);
+  // lazy - initialization
   const [filteredValuesTrackingArray, setFilteredValuesTrackingArray] =
-    useState([]);
+    useState(() =>
+      filterValues
+        .filter(
+          (filterItemValue) => filterItemValue.data.name === defaultCategory
+        )
+        .map(({ id }) => id)
+    );
 
   const handleFilterChange = (selectedValue) => {
-    const filteredValues = filter.map((filterItemValue) => {
-      let filterValueIsActive = false;
-      if (selectedValue === filterItemValue.id) {
-        filterValueIsActive = true;
-      }
-      if (filteredValuesTrackingArray.includes(selectedValue)) {
-        setFilteredValuesTrackingArray(
-          filteredValuesTrackingArray.filter(
-            (filterValueId) => filterValueId !== selectedValue
-          )
-        );
-      } else {
-        setFilteredValuesTrackingArray((currentFilteredValuesTrackingArray) => [
-          ...currentFilteredValuesTrackingArray,
-          selectedValue,
-        ]);
-      }
-      return { ...filterItemValue, active: filterValueIsActive };
-    });
-    setFilter(filteredValues);
+    if (filteredValuesTrackingArray.includes(selectedValue)) {
+      setFilteredValuesTrackingArray(
+        filteredValuesTrackingArray.filter(
+          (filterValueId) => filterValueId !== selectedValue
+        )
+      );
+    } else {
+      setFilteredValuesTrackingArray((currentFilteredValuesTrackingArray) => [
+        ...currentFilteredValuesTrackingArray,
+        selectedValue,
+      ]);
+    }
   };
 
   useEffect(() => {
-    if (filteredValuesTrackingArray.length) {
-      const newFilteredProducts = products.filter((product) =>
-        filteredValuesTrackingArray.includes(product.data?.category?.id)
-      );
-      setFilteredProducts(newFilteredProducts);
-    } else {
-      setFilteredProducts(products);
-    }
+    const filteredValues = filter.map((filterItemValue) => {
+      const isActive = filteredValuesTrackingArray.includes(filterItemValue.id);
+      return {
+        ...filterItemValue,
+        active: isActive,
+      };
+    });
+    setFilter(filteredValues);
+
+    const newFilteredProducts = products.filter(
+      (product) =>
+        filteredValuesTrackingArray.includes(product.data?.category?.id) ||
+        filteredValuesTrackingArray.length === 0
+    );
+    setFilteredProducts(newFilteredProducts);
   }, [filteredValuesTrackingArray]);
 
   return { filter, filteredProducts, handleFilterChange };

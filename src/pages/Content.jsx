@@ -1,18 +1,23 @@
 import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import MainLayout from '../layouts/MainLayout';
 import Homepage from './Homepage';
 import ProductList from './ProductList';
-import { usePage } from '../utils/hooks/PageContext';
-
-const contentComponents = {
-  homepage: Homepage,
-  plp: ProductList,
-};
 
 function Content() {
-  const { page } = usePage();
-  const ContentToRender = contentComponents[page];
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        { index: true, element: <Homepage /> },
+        { path: 'home', element: <Homepage /> },
+        { path: 'products', element: <ProductList /> },
+      ],
+    },
+  ]);
 
-  return <ContentToRender />;
+  return routes;
 }
 
 export default Content;

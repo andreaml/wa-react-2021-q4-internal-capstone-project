@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const StyledButtonLink = styled.button`
+const StyledButtonLink = styled(Link)`
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -8,6 +9,7 @@ const StyledButtonLink = styled.button`
   font-weight: 600;
   margin: 0 auto;
   padding: 10px 15px;
+  text-decoration: none;
   transition: all 0.3s ease-in;
   background-color: ${(props) => props.theme.darkGray};
   color: white;

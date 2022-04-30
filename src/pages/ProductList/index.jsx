@@ -9,6 +9,7 @@ import { StyledProductList, StyledTitle } from './styled';
 
 function ProductList() {
   const [isLoading, setIsLoading] = useState(true);
+  const defaultCategory = 'Bed & Bath';
 
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
@@ -23,7 +24,7 @@ function ProductList() {
     filter: mappedCategories,
     filteredProducts,
     handleFilterChange: handleCategoriesFilterChange,
-  } = useFilters(productCategories.results, products.results);
+  } = useFilters(productCategories.results, products.results, defaultCategory);
 
   return (
     <StyledProductList>
