@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../constants';
 import useLatestAPI from './useLatestAPI';
 
-function useProducts(productTags = []) {
+function useProducts({ productTags = [], page = 1, pageSize = 16 }) {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
   const [products, setProducts] = useState(() => ({
     data: {},
@@ -29,7 +29,7 @@ function useProducts(productTags = []) {
         const response = await fetch(
           `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
             '[[at(document.type, "product")]]'
-          )}${productTagsQueryParams}&lang=en-us&pageSize=16`,
+          )}${productTagsQueryParams}&lang=en-us&page=${page}&pageSize=${pageSize}`,
           {
             signal: controller.signal,
           }
@@ -49,7 +49,7 @@ function useProducts(productTags = []) {
     return () => {
       controller.abort();
     };
-  }, [apiRef, isApiMetadataLoading]);
+  }, [apiRef, isApiMetadataLoading, page]);
 
   return products;
 }

@@ -6,9 +6,9 @@ import {
   StyledWrapper,
 } from './styled';
 
-function Pagination({ page, totalPages }) {
-  const navigateToPage = (/* pageNumber */) => {
-    // TODO: Handle page navigation from function passed via props
+function Pagination({ page, totalPages, setPage }) {
+  const navigateToPage = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   const generatePagesButtons = () => {
@@ -36,7 +36,7 @@ function Pagination({ page, totalPages }) {
       <StyledNavigationButton
         type="button"
         title="Previous"
-        disabled={totalPages === 1}
+        disabled={totalPages === 1 || page === 1}
         onClick={() => {
           navigateToPage(page - 1);
         }}
@@ -63,6 +63,7 @@ function Pagination({ page, totalPages }) {
 Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 export default Pagination;

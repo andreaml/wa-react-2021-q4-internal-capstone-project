@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 
-function useFilters(filterValues, products, defaultCategory) {
+function useFilters(filterValues = [], products = [], defaultCategory = '') {
   const initializeFilterArray = () =>
-    filterValues.map((filterValueItem) => ({
-      ...filterValueItem,
-      active: filterValueItem.data.name === defaultCategory,
-    }));
+    filterValues.map((filterValueItem) => {
+      const productsLengthInCategory = products.filter(
+        (product) => product.data.category.id === filterValueItem.id
+      ).length;
+      return {
+        ...filterValueItem,
+        active: filterValueItem.data.name === defaultCategory,
+        productCount: productsLengthInCategory,
+      };
+    });
 
   const initializeFilteredValuesTrackingArray = () =>
     filterValues
@@ -15,9 +21,9 @@ function useFilters(filterValues, products, defaultCategory) {
       .map(({ id }) => id);
 
   const [filter, setFilter] = useState(initializeFilterArray);
-  const [filteredProducts, setFilteredProducts] = useState(products);
   const [filteredValuesTrackingArray, setFilteredValuesTrackingArray] =
-    useState(initializeFilteredValuesTrackingArray);
+    useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
     if (filterValues.length > 0) {
@@ -41,25 +47,43 @@ function useFilters(filterValues, products, defaultCategory) {
     }
   };
 
+  const handleClearFilters = () => {
+    setFilteredValuesTrackingArray([]);
+  };
+
   useEffect(() => {
-    const filteredValues = filter.map((filterItemValue) => {
-      const isActive = filteredValuesTrackingArray.includes(filterItemValue.id);
-      return {
-        ...filterItemValue,
-        active: isActive,
-      };
-    });
-    setFilter(filteredValues);
+    if (products.length > 0) {
+      const filteredValues = filter.map((filterItemValue) => {
+        const isActive = filteredValuesTrackingArray.includes(
+          filterItemValue.id
+        );
+        const productsLengthInCategory = products.filter(
+          (product) => product.data.category.id === filterItemValue.id
+        ).length;
+        return {
+          ...filterItemValue,
+          active: isActive,
+          productCount: productsLengthInCategory,
+        };
+      });
+      setFilter(filteredValues);
 
-    const newFilteredProducts = products.filter(
-      (product) =>
-        filteredValuesTrackingArray.includes(product.data?.category?.id) ||
-        filteredValuesTrackingArray.length === 0
-    );
-    setFilteredProducts(newFilteredProducts);
-  }, [filteredValuesTrackingArray]);
+      const newFilteredProducts = products.filter(
+        (product) =>
+          filteredValuesTrackingArray.includes(product.data?.category?.id) ||
+          filteredValuesTrackingArray.length === 0
+      );
+      setFilteredProducts(newFilteredProducts);
+    }
+  }, [filteredValuesTrackingArray, products]);
 
-  return { filter, filteredProducts, handleFilterChange };
+  return {
+    filter,
+    filteredProducts,
+    handleFilterChange,
+    handleClearFilters,
+    filtersAreActive: filteredValuesTrackingArray.length > 0,
+  };
 }
 
 export default useFilters;

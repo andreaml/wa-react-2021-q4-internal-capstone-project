@@ -9,7 +9,7 @@ function Homepage() {
   const { data: productCategories, isLoading: isProductCategoriesLoading } =
     useProductCategories();
   const { data: featuredProducts, isLoading: isLoadingFeaturedProducts } =
-    useProducts(['Featured']);
+    useProducts({ tags: ['Featured'] });
 
   return (
     <div>

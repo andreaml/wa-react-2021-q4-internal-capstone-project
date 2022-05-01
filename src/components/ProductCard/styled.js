@@ -5,6 +5,9 @@ export const StyledProductWrapper = styled.div`
   background: white;
   border-radius: 8px;
   box-shadow: 0px 7px 13px ${(props) => props.theme.loadingBackground};
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   padding-bottom: 15px;
   position: relative;
   text-align: center;

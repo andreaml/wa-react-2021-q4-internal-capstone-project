@@ -11,11 +11,14 @@ import {
   StyledSidebarItemSelector,
   StyledFilterButton,
 } from './styled';
+import StyledButton from '../StyledButton';
 
 function Sidebar({
   productCategories,
   isLoading,
   handleCategoriesFilterChange,
+  filtersAreActive,
+  handleClearFilters,
 }) {
   const [mobileFilterIsExpanded, setMobileFilterIsExpanded] = useState(false);
 
@@ -39,7 +42,7 @@ function Sidebar({
           </StyledCloseButton>
         </StyledFilterTitle>
         <StyledSidebarItemsWrapper>
-          {productCategories.map(({ id, data, active }) => (
+          {productCategories.map(({ id, data, active, productCount }) => (
             <li key={id}>
               <StyledSidebarItemSelector checked={active}>
                 <input
@@ -51,12 +54,15 @@ function Sidebar({
                     handleCategoriesFilterChange(id);
                   }}
                 />
-                {data.name}
+                {data.name} ({productCount})
               </StyledSidebarItemSelector>
             </li>
           ))}
         </StyledSidebarItemsWrapper>
       </StyledContentWrapper>
+      {filtersAreActive && (
+        <StyledButton onClick={handleClearFilters}>Clear filters</StyledButton>
+      )}
     </StyledWrapper>
   );
 }
@@ -65,14 +71,17 @@ Sidebar.propTypes = {
   productCategories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
+      active: PropTypes.bool,
+      productCount: PropTypes.number,
       data: PropTypes.shape({
-        active: PropTypes.bool,
         name: PropTypes.string,
       }),
     })
   ).isRequired,
-  handleCategoriesFilterChange: PropTypes.instanceOf(Function).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  handleCategoriesFilterChange: PropTypes.instanceOf(Function).isRequired,
+  filtersAreActive: PropTypes.bool.isRequired,
+  handleClearFilters: PropTypes.instanceOf(Function).isRequired,
 };
 
 export default Sidebar;
