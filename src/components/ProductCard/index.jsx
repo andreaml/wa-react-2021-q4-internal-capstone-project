@@ -10,10 +10,10 @@ import {
 } from './styled';
 import StyledButton from '../StyledButton';
 
-function ProductCard({ data }) {
+function ProductCard({ productId, data }) {
   return (
     <StyledProductWrapper title={data.name}>
-      <Link to={`/product/${data.sku}`}>
+      <Link to={`/product/${productId}`}>
         <StyledCategoryImage
           src={data.mainimage?.url}
           alt={data.mainimage?.alt}
@@ -39,6 +39,7 @@ function ProductCard({ data }) {
 }
 
 ProductCard.propTypes = {
+  productId: PropTypes.string.isRequired,
   data: PropTypes.shape({
     sku: PropTypes.string,
     category: PropTypes.shape({

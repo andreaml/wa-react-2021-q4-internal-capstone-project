@@ -21,7 +21,9 @@ function ProductsGrid({ isLoading, products }) {
           </StyledNoResults>
         )}
         {!isLoading &&
-          products.map(({ id, data }) => <ProductCard key={id} data={data} />)}
+          products.map(({ id, data }) => (
+            <ProductCard key={id} productId={id} data={data} />
+          ))}
       </StyledProductsWrapper>
     </StyledWrapper>
   );

@@ -14,7 +14,9 @@ function FeaturedProducts({ products, isLoading }) {
       <StyledProductsHeader>Featured&nbsp;&nbsp;Products</StyledProductsHeader>
       <StyledProductsWrapper>
         {!isLoading &&
-          products.map(({ id, data }) => <ProductCard key={id} data={data} />)}
+          products.map(({ id, data }) => (
+            <ProductCard key={id} productId={id} data={data} />
+          ))}
       </StyledProductsWrapper>
       <StyledButtonLink main="true" center="true" to="/products">
         View all products
