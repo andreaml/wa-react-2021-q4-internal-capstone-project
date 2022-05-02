@@ -1,11 +1,17 @@
 import styled from 'styled-components';
+import device from '../../utils/scss/mediaQueries';
 import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 
 const StyledProductGallery = styled.div`
   grid-area: productGalleryGrid;
-  width: 50vw;
-  height: auto;
+  width: 80vw;
+  height: 70vh;
   aspect-ratio: 58 / 75;
+
+  @media ${device.tablet} {
+    width: 40vw;
+    height: auto;
+  }
 
   .swiper-slide {
     background-position: center;

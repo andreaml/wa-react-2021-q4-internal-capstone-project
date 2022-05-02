@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductGalleryGrid from '../../components/ProductGalleryGrid';
 import StyledButton from '../../components/StyledButton';
 import useSearchProducts from '../../utils/hooks/useSearchProducts';
-import { StyledWrapper, StyledTitle, StyledProductInfoWrapper } from './styled';
+import {
+  StyledWrapper,
+  StyledTitle,
+  StyledProductInfoWrapper,
+  StyledProductInfo,
+  StyledProductInfoTag,
+  StyledProductInfoTable,
+  StyledProductAddToCartWrapper,
+  StyledProductAddToCartInput,
+  StyledProductInfoSecondary,
+} from './styled';
 
 function ProductDetail() {
   const { productId } = useParams();
   const { data: product, isLoading: isLoadingProduct } = useSearchProducts({
     productId,
   });
+  const [productCount, setProductCount] = useState(1);
+
+  const handleProductCountChange = (e) => {
+    setProductCount(e.target.value);
+  };
 
   const { results: [productItem = {}] = [] } = product;
 
   return (
-    <StyledWrapper>
+    <StyledWrapper isLoading={isLoadingProduct}>
       {!isLoadingProduct && (
         <>
           <StyledTitle>{productItem.data?.name}</StyledTitle>
@@ -23,43 +38,65 @@ function ProductDetail() {
             isLoading={isLoadingProduct}
           />
           <StyledProductInfoWrapper>
-            <p>${productItem.data?.price}</p>
-            <p>SKU: {productItem.data?.sku}</p>
-            <p>Category: {productItem.data?.category.slug}</p>
-            {productItem.tags?.map((tag) => (
-              <span key={`${productId}-tag-${tag}`}>{tag}</span>
-            ))}
-            <p>{productItem.data?.description?.[0]?.text}</p>
-            <div>
-              <input
+            <StyledProductInfo>SKU: {productItem.data?.sku}</StyledProductInfo>
+            <StyledProductInfo bold>
+              ${productItem.data?.price}
+              <StyledProductInfoSecondary>
+                {productItem.data?.stock > 0 ? 'On stock' : 'Sold out'}
+              </StyledProductInfoSecondary>
+            </StyledProductInfo>
+            <StyledProductInfo>
+              Category: {productItem.data?.category.slug}
+            </StyledProductInfo>
+            <StyledProductInfo>
+              {productItem.data?.description?.[0]?.text}
+            </StyledProductInfo>
+            <StyledProductInfo>
+              Tags:
+              {productItem.tags?.map((tag) => (
+                <StyledProductInfoTag key={`${productId}-tag-${tag}`}>
+                  {tag}
+                </StyledProductInfoTag>
+              ))}
+            </StyledProductInfo>
+            <StyledProductAddToCartWrapper>
+              <StyledProductAddToCartInput
                 type="number"
                 name="quantity"
                 min={0}
                 max={productItem.data?.stock}
+                inputmode="numeric"
+                value={productCount}
+                onChange={handleProductCountChange}
+                disabled={productItem.data?.stock === 0}
               />
               <StyledButton
                 type="button"
                 main
+                left
                 onClick={() => {
-                  console.log('add product to cart');
+                  // console.log('add product to cart');
                 }}
+                disabled={productItem.data?.stock === 0}
               >
                 Add to Cart
               </StyledButton>
-            </div>
-            <table>
-              <tr>
-                <th colSpan={2}>Product specifications</th>
-              </tr>
-              {productItem.data?.specs?.map(
-                ({ spec_name: specName, spec_value: specValue }) => (
-                  <tr>
-                    <td>{specName}</td>
-                    <td>{specValue}</td>
-                  </tr>
-                )
-              )}
-            </table>
+            </StyledProductAddToCartWrapper>
+            <StyledProductInfoTable>
+              <tbody>
+                <tr>
+                  <th colSpan={2}>Product specifications</th>
+                </tr>
+                {productItem.data?.specs?.map(
+                  ({ spec_name: specName, spec_value: specValue }) => (
+                    <tr key={`${productItem.data?.sku}-${specName}`}>
+                      <td>{specName}</td>
+                      <td>{specValue}</td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </StyledProductInfoTable>
           </StyledProductInfoWrapper>
         </>
       )}

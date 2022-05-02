@@ -41,7 +41,7 @@ function ProductCard({ productId, data, showDescription }) {
           type="button"
           main
           onClick={() => {
-            console.log('add product to cart');
+            // console.log('add product to cart');
           }}
         >
           Add to Cart

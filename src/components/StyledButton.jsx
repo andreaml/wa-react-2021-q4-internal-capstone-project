@@ -17,6 +17,14 @@ const StyledButton = styled.button`
     background-color: ${(props) => props.theme.main};
   }
 
+  &:disabled {
+    background-color: ${(props) => props.theme.mediumGray};
+    &:hover {
+      background-color: ${(props) => props.theme.mediumGray};
+      cursor: not-allowed;
+    }
+  }
+
   ${(props) =>
     props.main &&
     css`
@@ -29,9 +37,9 @@ const StyledButton = styled.button`
     `}
 
   ${(props) =>
-    props.center &&
+    props.left &&
     css`
-      margin: 0 auto;
+      margin-left: 0;
       width: fit-content;
     `}
 `;
