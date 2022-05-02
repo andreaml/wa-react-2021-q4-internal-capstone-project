@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/wa-react-2021-q4-internal-capstone-project/static/css/main.e6c13ad2.css",
-    "main.js": "/wa-react-2021-q4-internal-capstone-project/static/js/main.89a306bb.js",
+    "main.css": "/wa-react-2021-q4-internal-capstone-project/static/css/main.2343a5ec.css",
+    "main.js": "/wa-react-2021-q4-internal-capstone-project/static/js/main.0388e641.js",
     "static/js/787.8626abe6.chunk.js": "/wa-react-2021-q4-internal-capstone-project/static/js/787.8626abe6.chunk.js",
     "static/media/plant.svg": "/wa-react-2021-q4-internal-capstone-project/static/media/plant.68c655d1b01aead47a302572c6142c0a.svg",
     "static/media/shopping-cart.svg": "/wa-react-2021-q4-internal-capstone-project/static/media/shopping-cart.879301fed1042ae3e8b7a2b046bb4329.svg",
@@ -11,12 +11,12 @@
     "index.html": "/wa-react-2021-q4-internal-capstone-project/index.html",
     "static/media/search.svg": "/wa-react-2021-q4-internal-capstone-project/static/media/search.c41746e5adc3f8c812d5dcc5c3d8c65c.svg",
     "static/media/close.svg": "/wa-react-2021-q4-internal-capstone-project/static/media/close.9f829dbea39731db81140261f0f3f969.svg",
-    "main.e6c13ad2.css.map": "/wa-react-2021-q4-internal-capstone-project/static/css/main.e6c13ad2.css.map",
-    "main.89a306bb.js.map": "/wa-react-2021-q4-internal-capstone-project/static/js/main.89a306bb.js.map",
+    "main.2343a5ec.css.map": "/wa-react-2021-q4-internal-capstone-project/static/css/main.2343a5ec.css.map",
+    "main.0388e641.js.map": "/wa-react-2021-q4-internal-capstone-project/static/js/main.0388e641.js.map",
     "787.8626abe6.chunk.js.map": "/wa-react-2021-q4-internal-capstone-project/static/js/787.8626abe6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.89a306bb.js"
+    "static/css/main.2343a5ec.css",
+    "static/js/main.0388e641.js"
   ]
 }
