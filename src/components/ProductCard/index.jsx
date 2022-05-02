@@ -7,33 +7,46 @@ import {
   StyledProductName,
   StyledProductPrice,
   StyledProductWrapper,
+  StyledProductInfoWrapper,
+  StyledProductDescription,
 } from './styled';
 import StyledButton from '../StyledButton';
 
-function ProductCard({ productId, data }) {
+function ProductCard({ productId, data, showDescription }) {
+  const {
+    name,
+    mainimage,
+    price,
+    category,
+    short_description: shortDescription,
+  } = data;
   return (
-    <StyledProductWrapper title={data.name}>
-      <Link to={`/product/${productId}`}>
-        <StyledCategoryImage
-          src={data.mainimage?.url}
-          alt={data.mainimage?.alt}
-        />
-        <StyledProductName>{data.name}</StyledProductName>
+    <StyledProductWrapper title={name}>
+      <Link to={`/product/${productId}`} className="link-image">
+        <StyledCategoryImage src={mainimage?.url} alt={mainimage?.alt} />
+        <StyledProductName>{name}</StyledProductName>
       </Link>
-      <StyledProductPrice>${data.price}</StyledProductPrice>
-      <StyledProductCategoryName>
-        {data.category?.name || data.category?.slug}
-      </StyledProductCategoryName>
-      <br />
-      <StyledButton
-        type="button"
-        main
-        onClick={() => {
-          console.log('add product to cart');
-        }}
-      >
-        Add to Cart
-      </StyledButton>
+      <StyledProductInfoWrapper>
+        <StyledProductPrice>${price}</StyledProductPrice>
+        <StyledProductCategoryName>
+          {category?.name || category?.slug}
+        </StyledProductCategoryName>
+        {showDescription && (
+          <StyledProductDescription>
+            {shortDescription}
+          </StyledProductDescription>
+        )}
+        <br />
+        <StyledButton
+          type="button"
+          main
+          onClick={() => {
+            console.log('add product to cart');
+          }}
+        >
+          Add to Cart
+        </StyledButton>
+      </StyledProductInfoWrapper>
     </StyledProductWrapper>
   );
 }
@@ -52,7 +65,13 @@ ProductCard.propTypes = {
       url: PropTypes.string,
     }),
     price: PropTypes.number,
+    short_description: PropTypes.string,
   }).isRequired,
+  showDescription: PropTypes.bool,
+};
+
+ProductCard.defaultProps = {
+  showDescription: false,
 };
 
 export default ProductCard;

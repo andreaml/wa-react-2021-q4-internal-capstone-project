@@ -24,6 +24,14 @@ export const StyledProductWrapper = styled.div`
   }
 `;
 
+export const StyledProductInfoWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  justify-content: space-around;
+  padding: 15px;
+`;
+
 export const StyledCategoryImage = styled.img`
   ${LoadingBackgroundAnimation({ aspectRatio: '58 / 75' })}
   border-top-left-radius: 8px;
@@ -48,4 +56,11 @@ export const StyledProductCategoryName = styled.span`
   display: block;
   font-size: 0.7rem;
   text-transform: capitalize;
+`;
+
+export const StyledProductDescription = styled(StyledProductName)`
+  color: ${(props) => props.theme.darkGray};
+  display: block;
+  font-size: 0.7rem;
+  font-weight: normal;
 `;

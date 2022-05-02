@@ -12,7 +12,8 @@ export const StyledProductsWrapper = styled.div`
   ${({ isLoading }) => isLoading && LoadingBackgroundAnimation()}
   column-gap: 15px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+  grid-template-columns: ${({ cardsTemplateColumns }) =>
+    cardsTemplateColumns || 'repeat(auto-fit, minmax(144px, 1fr))'};
   justify-content: center;
   margin: 0 auto;
   row-gap: 40px;

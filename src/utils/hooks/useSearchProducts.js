@@ -21,7 +21,7 @@ function useSearchProducts({
   const searchTermQueryParam = searchTerm
     ? `&q=${encodeURIComponent(
         '[[at(document.type, "product")]]'
-      )}&q=${encodeURIComponent(`[[fulltext(document, '${searchTerm}')]]`)}`
+      )}&q=${encodeURIComponent(`[[fulltext(document, "${searchTerm}")]]`)}`
     : '';
 
   useEffect(() => {

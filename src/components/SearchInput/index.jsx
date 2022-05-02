@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { StyledButton, StyledInput, StyledWrapper } from './styled';
 
@@ -6,6 +7,7 @@ function SearchInput() {
   const [inputIsExpanded, setInputIsExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleInputExpanded = () => {
     setInputIsExpanded((currentExpandedValue) => !currentExpandedValue);
@@ -14,6 +16,9 @@ function SearchInput() {
   const search = (e) => {
     e.preventDefault();
     toggleInputExpanded();
+    if (searchValue.trim().length > 0) {
+      navigate(`/search?q=${searchValue}`);
+    }
   };
 
   const triggerSearchClickAction = (e) => {

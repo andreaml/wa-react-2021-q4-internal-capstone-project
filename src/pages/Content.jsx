@@ -4,6 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import Homepage from './Homepage';
 import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
+import Search from './Search';
 
 function Content() {
   const routes = useRoutes([
@@ -17,6 +18,10 @@ function Content() {
         {
           path: 'product/:productId',
           element: <ProductDetail />,
+        },
+        {
+          path: 'search',
+          element: <Search />,
         },
       ],
     },
