@@ -1,8 +1,7 @@
+import { Link, NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-// Question: If I create a single file styled component, how should I name the file?
-// ((StyledComponent.styled.js or Component.styled.js))
-// And how to export its component name? ((StyledComponent or Component))
-const StyledSimpleLink = styled.a`
+
+const sharedLinksCss = css`
   color: black;
   font-size: 14px;
   letter-spacing: 1px;
@@ -24,11 +23,21 @@ const StyledSimpleLink = styled.a`
       font-size: 12px;
     `}
 
-  ${(props) =>
+${(props) =>
     props.uppercase &&
     css`
       text-transform: uppercase;
     `}
 `;
 
-export default StyledSimpleLink;
+export const StyledSimpleLink = styled.a`
+  ${sharedLinksCss}
+`;
+
+export const StyledLink = styled(Link)`
+  ${sharedLinksCss}
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  ${sharedLinksCss}
+`;

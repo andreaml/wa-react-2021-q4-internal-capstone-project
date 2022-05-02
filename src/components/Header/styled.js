@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import device from '../../utils/scss/mediaQueries';
-import StyledSimpleLink from '../SimpleLink.styled';
+import { StyledNavLink } from '../StyledLinks.styled';
 
 export const StyledWrapper = styled.nav`
   align-items: center;
@@ -81,10 +81,14 @@ export const StyledListItem = styled.li`
     }
   }
 
-  ${StyledSimpleLink} {
+  ${StyledNavLink} {
     display: block;
     padding: 10px 0;
     transition: inherit;
     width: 100%;
+
+    &.active {
+      text-decoration: underline;
+    }
   }
 `;

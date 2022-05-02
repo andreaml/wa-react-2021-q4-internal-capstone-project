@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../Logo';
+import { StyledNavLink } from '../StyledLinks.styled';
 import SearchInput from '../SearchInput';
 import ShoppingCartButton from './ShoppingCartButton';
 import HamburgerButton from './HamburgerButton';
@@ -9,7 +10,6 @@ import {
   StyledListItem,
   StyledList,
 } from './styled';
-import StyledSimpleLink from '../SimpleLink.styled';
 
 function Header() {
   const [mobileNavbarIsExpanded, setMobileNavbarIsExpanded] = useState(false);
@@ -17,19 +17,13 @@ function Header() {
   const toggleMobileNavbar = () => {
     setMobileNavbarIsExpanded((currentExpandedValue) => !currentExpandedValue);
   };
+
   return (
     <StyledWrapper>
       <Logo />
       <StyledCategoriesList expanded={mobileNavbarIsExpanded}>
         <StyledListItem>
-          <StyledSimpleLink uppercase href="#" title="Categories">
-            Categories
-          </StyledSimpleLink>
-        </StyledListItem>
-        <StyledListItem>
-          <StyledSimpleLink uppercase href="#" title="Sale">
-            Sale
-          </StyledSimpleLink>
+          <StyledNavLink to="/products">Products</StyledNavLink>
         </StyledListItem>
       </StyledCategoriesList>
       <StyledList>
