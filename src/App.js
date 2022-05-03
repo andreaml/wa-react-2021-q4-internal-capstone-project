@@ -1,8 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { PageProvider } from './utils/hooks/PageContext';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './utils/scss/theme';
 import Content from './pages/Content';
 
@@ -15,13 +13,11 @@ const StyledWrapper = styled.div`
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <PageProvider page="homepage">
-        <StyledWrapper>
-          <Header />
+      <StyledWrapper>
+        <Router>
           <Content />
-          <Footer />
-        </StyledWrapper>
-      </PageProvider>
+        </Router>
+      </StyledWrapper>
     </ThemeProvider>
   );
 }

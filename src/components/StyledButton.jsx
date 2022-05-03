@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const StyledButtonLink = styled(Link)`
+const StyledButton = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -18,6 +17,14 @@ const StyledButtonLink = styled(Link)`
     background-color: ${(props) => props.theme.main};
   }
 
+  &:disabled {
+    background-color: ${(props) => props.theme.mediumGray};
+    &:hover {
+      background-color: ${(props) => props.theme.mediumGray};
+      cursor: not-allowed;
+    }
+  }
+
   ${(props) =>
     props.main &&
     css`
@@ -30,11 +37,11 @@ const StyledButtonLink = styled(Link)`
     `}
 
   ${(props) =>
-    props.center &&
+    props.left &&
     css`
-      margin: 0 auto;
+      margin-left: 0;
       width: fit-content;
     `}
 `;
 
-export default StyledButtonLink;
+export default StyledButton;

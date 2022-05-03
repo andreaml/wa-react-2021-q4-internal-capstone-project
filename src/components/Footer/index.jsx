@@ -1,5 +1,4 @@
 import React from 'react';
-import StyledSimpleLink from '../SimpleLink.styled';
 import Logo from '../Logo';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
@@ -12,10 +11,10 @@ import {
   StyledSectionTitle,
   StyledWrapper,
 } from './styled';
+import { StyledSimpleLink, StyledLink } from '../StyledLinks.styled';
 
 function Footer() {
   return (
-    // Question: is it ok to name every styled component with the prefix "Styled"?
     <StyledWrapper>
       <StyledInnerWrapper>
         <StyledSection gridArea="brandInfo">
@@ -30,14 +29,14 @@ function Footer() {
           <StyledSectionTitle>Directory</StyledSectionTitle>
           <StyledList>
             <StyledListItem>
-              <StyledSimpleLink light small href="#" title="Categories">
-                Categories
-              </StyledSimpleLink>
-            </StyledListItem>
-            <StyledListItem>
-              <StyledSimpleLink light small href="#" title="Sale">
-                Sale
-              </StyledSimpleLink>
+              <StyledLink
+                light="true"
+                small="true"
+                to="products"
+                title="Categories"
+              >
+                Products
+              </StyledLink>
             </StyledListItem>
           </StyledList>
         </StyledSection>
@@ -53,8 +52,8 @@ function Footer() {
             <StyledListItem>
               <EmailIcon />
               <StyledSimpleLink
-                light
-                small
+                light="true"
+                small="true"
                 href="mailto:contact@decochoice.com"
                 title="Mail to contact@decochoice.com"
               >
@@ -67,12 +66,12 @@ function Footer() {
           Ecommerce created during Wizeline&apos;s Academy React Bootcamp
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; Icons by{' '}
           <StyledSimpleLink
-            light
-            small
+            light="true"
+            small="true"
             href="https://svgrepo.com"
             target="_blank"
             rel="noopener norreferer"
-            title="Mail to contact@decochoice.com"
+            title="Icons source svgrepo.com"
           >
             svgrepo.com
           </StyledSimpleLink>

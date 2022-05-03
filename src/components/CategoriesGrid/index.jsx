@@ -10,21 +10,26 @@ import {
   StyledWrapper,
 } from './styled';
 
-function CategoriesGrid({ categories }) {
+function CategoriesGrid({ categories, isLoading }) {
   return (
     <StyledWrapper>
       <StyledCategoriesHeader>Categories</StyledCategoriesHeader>
-      <StyledCategoriesWrapper>
-        {categories.map(({ id, data }) => (
-          <StyledCategoryWrapper key={id} href="#" title={data.name}>
-            <StyledCategoryName>{data.name}</StyledCategoryName>
-            <StyledCategoryImage
-              src={data.main_image?.url}
-              alt={data.main_image?.alt}
-            />
-            <StyledCategoryLinkText>Watch more &rarr;</StyledCategoryLinkText>
-          </StyledCategoryWrapper>
-        ))}
+      <StyledCategoriesWrapper isLoading={isLoading}>
+        {!isLoading &&
+          categories.map(({ id, data }) => (
+            <StyledCategoryWrapper
+              key={id}
+              to={`/products?category=${encodeURIComponent(data.name)}`}
+              title={data.name}
+            >
+              <StyledCategoryName>{data.name}</StyledCategoryName>
+              <StyledCategoryImage
+                src={data.main_image?.url}
+                alt={data.main_image?.alt}
+              />
+              <StyledCategoryLinkText>Watch more &rarr;</StyledCategoryLinkText>
+            </StyledCategoryWrapper>
+          ))}
       </StyledCategoriesWrapper>
     </StyledWrapper>
   );
@@ -43,6 +48,7 @@ CategoriesGrid.propTypes = {
       }),
     })
   ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default CategoriesGrid;

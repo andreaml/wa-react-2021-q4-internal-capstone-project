@@ -1,40 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import products from '../../assets/data/products';
-import productCategories from '../../assets/data/product-categories';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
 import ProductsGrid from '../../components/ProductsGrid';
 import Sidebar from '../../components/Sidebar';
 import useFilters from '../../utils/hooks/useFilters';
+import useProductCategories from '../../utils/hooks/useProductCategories';
+import useProducts from '../../utils/hooks/useProducts';
 import { StyledProductList, StyledTitle } from './styled';
 
 function ProductList() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(page);
+  const { data: productCategories, isLoading: isLoadingProductCategories } =
+    useProductCategories();
+  const { data: products, isLoading: isLoadingProducts } = useProducts({
+    page,
+    pageSize: 12,
+  });
+  const [searchParams] = useSearchParams();
+  const defaultCategory = searchParams.get('category');
 
   useEffect(() => {
-    const loadingTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => {
-      clearTimeout(loadingTimeout);
-    };
-  }, []);
+    if (products.total_pages) {
+      setTotalPages(products.total_pages);
+    }
+  }, [products]);
 
   const {
     filter: mappedCategories,
     filteredProducts,
     handleFilterChange: handleCategoriesFilterChange,
-  } = useFilters(productCategories.results, products.results);
+    filtersAreActive,
+    handleClearFilters,
+  } = useFilters(productCategories.results, products.results, defaultCategory);
 
   return (
     <StyledProductList>
       <StyledTitle>Products catalog</StyledTitle>
       <Sidebar
         productCategories={mappedCategories}
+        isLoading={isLoadingProductCategories}
         handleCategoriesFilterChange={handleCategoriesFilterChange}
+        filtersAreActive={filtersAreActive}
+        handleClearFilters={handleClearFilters}
       />
-      <ProductsGrid isLoading={isLoading} products={filteredProducts} />
-      {!isLoading && filteredProducts.length !== 0 && (
-        <Pagination page={products.page} totalPages={products.total_pages} />
+      <ProductsGrid isLoading={isLoadingProducts} products={filteredProducts} />
+      {products.results?.length !== 0 && (
+        <Pagination
+          page={products.page || page}
+          totalPages={totalPages}
+          setPage={setPage}
+        />
       )}
     </StyledProductList>
   );

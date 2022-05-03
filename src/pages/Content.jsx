@@ -1,18 +1,33 @@
 import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import MainLayout from '../layouts/MainLayout';
 import Homepage from './Homepage';
+import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
-import { usePage } from '../utils/hooks/PageContext';
-
-const contentComponents = {
-  homepage: Homepage,
-  plp: ProductList,
-};
+import Search from './Search';
 
 function Content() {
-  const { page } = usePage();
-  const ContentToRender = contentComponents[page];
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        { index: true, element: <Homepage /> },
+        { path: 'home', element: <Homepage /> },
+        { path: 'products', element: <ProductList /> },
+        {
+          path: 'product/:productId',
+          element: <ProductDetail />,
+        },
+        {
+          path: 'search',
+          element: <Search />,
+        },
+      ],
+    },
+  ]);
 
-  return <ContentToRender />;
+  return routes;
 }
 
 export default Content;

@@ -9,19 +9,35 @@ import {
 import ProductCard from '../ProductCard';
 import { ReactComponent as PlantIcon } from '../../assets/icons/plant.svg';
 
-function ProductsGrid({ isLoading, products }) {
+function ProductsGrid({
+  isLoading,
+  products,
+  notFoundMessage,
+  cardsTemplateColumns,
+  showDescription,
+}) {
   return (
     <StyledWrapper>
-      <StyledProductsWrapper isLoading={isLoading}>
+      <StyledProductsWrapper
+        isLoading={isLoading}
+        cardsTemplateColumns={cardsTemplateColumns}
+      >
         {!isLoading && products.length === 0 && (
           <StyledNoResults>
             <PlantIcon />
             <StyledNoResultsTitle>Sorry</StyledNoResultsTitle>
-            <p>No products found with the selected filters</p>
+            <p>{notFoundMessage}</p>
           </StyledNoResults>
         )}
         {!isLoading &&
-          products.map(({ id, data }) => <ProductCard key={id} data={data} />)}
+          products.map(({ id, data }) => (
+            <ProductCard
+              key={id}
+              productId={id}
+              data={data}
+              showDescription={showDescription}
+            />
+          ))}
       </StyledProductsWrapper>
     </StyledWrapper>
   );
@@ -37,6 +53,15 @@ ProductsGrid.propTypes = {
     })
   ).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  notFoundMessage: PropTypes.string,
+  cardsTemplateColumns: PropTypes.string,
+  showDescription: PropTypes.bool,
+};
+
+ProductsGrid.defaultProps = {
+  notFoundMessage: 'No products found with the selected filters',
+  cardsTemplateColumns: '',
+  showDescription: false,
 };
 
 export default ProductsGrid;

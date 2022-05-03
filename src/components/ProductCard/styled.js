@@ -1,20 +1,35 @@
 import styled from 'styled-components';
 import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 
-export const StyledProductWrapper = styled.a`
+export const StyledProductWrapper = styled.div`
   background: white;
   border-radius: 8px;
   box-shadow: 0px 7px 13px ${(props) => props.theme.loadingBackground};
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   padding-bottom: 15px;
   position: relative;
   text-align: center;
-  text-decoration: none;
   transition: transform 0.5s;
 
   &:hover {
     transform: scale(1.04);
     box-shadow: 1px 7px 9px ${(props) => props.theme.mediumGray};
   }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+`;
+
+export const StyledProductInfoWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  justify-content: space-around;
+  padding: 15px;
 `;
 
 export const StyledCategoryImage = styled.img`
@@ -41,4 +56,11 @@ export const StyledProductCategoryName = styled.span`
   display: block;
   font-size: 0.7rem;
   text-transform: capitalize;
+`;
+
+export const StyledProductDescription = styled(StyledProductName)`
+  color: ${(props) => props.theme.darkGray};
+  display: block;
+  font-size: 0.7rem;
+  font-weight: normal;
 `;

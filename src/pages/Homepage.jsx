@@ -2,15 +2,26 @@ import React from 'react';
 import Slider from '../components/Slider';
 import CategoriesGrid from '../components/CategoriesGrid';
 import FeaturedProducts from '../components/FeaturedProducts';
-import productCategories from '../assets/data/product-categories';
-import featuredProducts from '../assets/data/featured-products';
+import useProductCategories from '../utils/hooks/useProductCategories';
+import useProducts from '../utils/hooks/useProducts';
 
 function Homepage() {
+  const { data: productCategories, isLoading: isProductCategoriesLoading } =
+    useProductCategories();
+  const { data: featuredProducts, isLoading: isLoadingFeaturedProducts } =
+    useProducts({ tags: ['Featured'] });
+
   return (
     <div>
       <Slider />
-      <CategoriesGrid categories={productCategories.results} />
-      <FeaturedProducts products={featuredProducts.results} />
+      <CategoriesGrid
+        categories={productCategories.results || []}
+        isLoading={isProductCategoriesLoading}
+      />
+      <FeaturedProducts
+        products={featuredProducts.results}
+        isLoading={isLoadingFeaturedProducts}
+      />
     </div>
   );
 }

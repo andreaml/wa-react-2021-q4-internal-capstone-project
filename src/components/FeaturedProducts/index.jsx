@@ -7,24 +7,18 @@ import {
 } from './styled';
 import ProductCard from '../ProductCard';
 import StyledButtonLink from '../StyledButtonLink';
-import { usePage } from '../../utils/hooks/PageContext';
 
-function FeaturedProducts({ products }) {
-  const { setCurrentPage } = usePage();
+function FeaturedProducts({ products, isLoading }) {
   return (
-    <StyledWrapper>
+    <StyledWrapper isLoading={isLoading}>
       <StyledProductsHeader>Featured&nbsp;&nbsp;Products</StyledProductsHeader>
       <StyledProductsWrapper>
-        {products.map(({ id, data }) => (
-          <ProductCard key={id} data={data} />
-        ))}
+        {!isLoading &&
+          products.map(({ id, data }) => (
+            <ProductCard key={id} productId={id} data={data} />
+          ))}
       </StyledProductsWrapper>
-      <StyledButtonLink
-        main
-        onClick={() => {
-          setCurrentPage('plp');
-        }}
-      >
+      <StyledButtonLink main="true" center="true" to="/products">
         View all products
       </StyledButtonLink>
     </StyledWrapper>
@@ -39,7 +33,12 @@ FeaturedProducts.propTypes = {
       price: PropTypes.number,
       slug: PropTypes.string,
     })
-  ).isRequired,
+  ),
+  isLoading: PropTypes.bool.isRequired,
+};
+
+FeaturedProducts.defaultProps = {
+  products: [],
 };
 
 export default FeaturedProducts;
