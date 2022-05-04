@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Cart from './Cart';
 import Homepage from './Homepage';
 import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
@@ -19,10 +20,8 @@ function Content() {
           path: 'product/:productId',
           element: <ProductDetail />,
         },
-        {
-          path: 'search',
-          element: <Search />,
-        },
+        { path: 'search', element: <Search /> },
+        { path: 'cart', element: <Cart /> },
       ],
     },
   ]);
