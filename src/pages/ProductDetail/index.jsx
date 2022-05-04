@@ -21,7 +21,7 @@ import {
 
 function ProductDetail() {
   const { productId } = useParams();
-  const { data: product, isLoading: isLoadingProduct } = useSearchProducts({
+  const { data: product, isLoading } = useSearchProducts({
     productId,
   });
   const [productCount, setProductCount] = useState(1);
@@ -33,8 +33,8 @@ function ProductDetail() {
   const { results: [productItem = {}] = [] } = product;
 
   return (
-    <StyledWrapper isLoading={isLoadingProduct}>
-      {!isLoadingProduct && product?.results?.length === 0 && (
+    <StyledWrapper isLoading={isLoading}>
+      {!isLoading && product?.results?.length === 0 && (
         <StyledNoResults>
           <PlantIcon />
           <StyledNoResultsTitle>Sorry</StyledNoResultsTitle>
@@ -44,12 +44,12 @@ function ProductDetail() {
           </StyledButtonLink>
         </StyledNoResults>
       )}
-      {!isLoadingProduct && product?.results?.length > 0 && (
+      {!isLoading && product?.results?.length > 0 && (
         <>
           <StyledTitle>{productItem.data?.name}</StyledTitle>
           <ProductGalleryGrid
             images={productItem.data?.images || []}
-            isLoading={isLoadingProduct}
+            isLoading={isLoading}
           />
           <StyledProductInfoWrapper>
             <StyledProductInfo>SKU: {productItem.data?.sku}</StyledProductInfo>
