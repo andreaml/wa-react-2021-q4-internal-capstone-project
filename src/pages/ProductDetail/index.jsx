@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ReactComponent as PlantIcon } from '../../assets/icons/plant.svg';
 import ProductGalleryGrid from '../../components/ProductGalleryGrid';
 import StyledButton from '../../components/StyledButton';
+import StyledButtonLink from '../../components/StyledButtonLink';
 import useSearchProducts from '../../utils/hooks/useSearchProducts';
 import {
   StyledWrapper,
@@ -13,6 +15,8 @@ import {
   StyledProductAddToCartWrapper,
   StyledProductAddToCartInput,
   StyledProductInfoSecondary,
+  StyledNoResults,
+  StyledNoResultsTitle,
 } from './styled';
 
 function ProductDetail() {
@@ -30,7 +34,17 @@ function ProductDetail() {
 
   return (
     <StyledWrapper isLoading={isLoadingProduct}>
-      {!isLoadingProduct && (
+      {!isLoadingProduct && product?.results?.length === 0 && (
+        <StyledNoResults>
+          <PlantIcon />
+          <StyledNoResultsTitle>Sorry</StyledNoResultsTitle>
+          <p>No product found with id &quot;{productId}&quot;</p>
+          <StyledButtonLink main center to="/products">
+            Go to Products
+          </StyledButtonLink>
+        </StyledNoResults>
+      )}
+      {!isLoadingProduct && product?.results?.length > 0 && (
         <>
           <StyledTitle>{productItem.data?.name}</StyledTitle>
           <ProductGalleryGrid

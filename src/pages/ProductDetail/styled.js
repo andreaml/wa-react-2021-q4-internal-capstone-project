@@ -23,7 +23,6 @@ export const StyledWrapper = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: max-content 1fr;
     margin-top: 60px;
-    padding-right: 3vw;
   }
 `;
 
@@ -43,6 +42,30 @@ export const StyledTitle = styled.h1`
 export const StyledProductInfoWrapper = styled.section`
   grid-area: productInfo;
   padding: 0 20px;
+  @media ${device.tablet} {
+    padding-right: 3vw;
+  }
+`;
+
+export const StyledNoResults = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 80px 20px 40px 20px;
+  text-align: center;
+  width: 100%;
+
+  svg {
+    height: 100px;
+    width: 100px;
+  }
+`;
+
+export const StyledNoResultsTitle = styled.h2`
+  color: ${(props) => props.theme.main};
+  margin-bottom: 0;
 `;
 
 export const StyledProductInfo = styled.p`
