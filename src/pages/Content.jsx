@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Page404 from './404';
 import Homepage from './Homepage';
 import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
@@ -23,6 +24,7 @@ function Content() {
           path: 'search',
           element: <Search />,
         },
+        { path: '*', element: <Page404 /> },
       ],
     },
   ]);
