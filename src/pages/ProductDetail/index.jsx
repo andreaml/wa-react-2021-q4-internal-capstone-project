@@ -75,7 +75,7 @@ function ProductDetail() {
                 main
                 left
                 onClick={() => {
-                  // console.log('add product to cart');
+                  // TODO add product to cart
                 }}
                 disabled={productItem.data?.stock === 0}
               >
