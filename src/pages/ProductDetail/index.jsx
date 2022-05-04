@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductGalleryGrid from '../../components/ProductGalleryGrid';
 import StyledButton from '../../components/StyledButton';
+import { useCart } from '../../utils/hooks/CartContext';
 import useSearchProducts from '../../utils/hooks/useSearchProducts';
 import {
   StyledWrapper,
@@ -20,10 +21,21 @@ function ProductDetail() {
   const { data: product, isLoading: isLoadingProduct } = useSearchProducts({
     productId,
   });
-  const [productCount, setProductCount] = useState(1);
+  const { cart, addProductToCart } = useCart();
+  const currentProductInCart = cart.items.filter(
+    (item) => item.id === productId
+  )[0];
+
+  const [productCount, setProductCount] = useState(() => {
+    let productInCartCount = 1;
+    if (currentProductInCart && currentProductInCart.count > 0) {
+      productInCartCount = currentProductInCart.count;
+    }
+    return productInCartCount;
+  });
 
   const handleProductCountChange = (e) => {
-    setProductCount(e.target.value);
+    setProductCount(Number(e.target.value));
   };
 
   const { results: [productItem = {}] = [] } = product;
@@ -75,11 +87,11 @@ function ProductDetail() {
                 main
                 left
                 onClick={() => {
-                  // console.log('add product to cart');
+                  addProductToCart(productItem, productCount);
                 }}
                 disabled={productItem.data?.stock === 0}
               >
-                Add to Cart
+                {currentProductInCart ? 'Update Cart' : 'Add to Cart'}
               </StyledButton>
             </StyledProductAddToCartWrapper>
             <StyledProductInfoTable>

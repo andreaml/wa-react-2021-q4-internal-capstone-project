@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { CartContextProvider } from './utils/hooks/CartContext';
 import theme from './utils/scss/theme';
 import Content from './pages/Content';
 
@@ -13,11 +14,13 @@ const StyledWrapper = styled.div`
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StyledWrapper>
-        <Router>
-          <Content />
-        </Router>
-      </StyledWrapper>
+      <CartContextProvider>
+        <StyledWrapper>
+          <Router>
+            <Content />
+          </Router>
+        </StyledWrapper>
+      </CartContextProvider>
     </ThemeProvider>
   );
 }
