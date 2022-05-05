@@ -2,17 +2,17 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledButtonLink = styled(Link)`
-  border: none;
+  background-color: ${(props) => props.theme.darkGray};
   border-radius: 8px;
+  border: none;
+  color: white;
   cursor: pointer;
   display: block;
   font-weight: 600;
-  margin: 0 auto;
   padding: 10px 15px;
   text-decoration: none;
   transition: all 0.3s ease-in;
-  background-color: ${(props) => props.theme.darkGray};
-  color: white;
+  width: fit-content;
 
   &:hover {
     background-color: ${(props) => props.theme.main};
@@ -33,7 +33,16 @@ const StyledButtonLink = styled(Link)`
     props.center &&
     css`
       margin: 0 auto;
-      width: fit-content;
+    `}
+  ${(props) =>
+    props.right &&
+    css`
+      margin: 0 0 0 auto;
+    `}
+  ${(props) =>
+    props.left &&
+    css`
+      margin: 0 auto 0 0;
     `}
 `;
 

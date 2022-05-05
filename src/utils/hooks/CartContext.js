@@ -6,6 +6,7 @@ import {
   cartReducer,
   EMPTY_CART,
   REMOVE_ITEM,
+  SET_ITEM_QUANTITY,
 } from '../reducers/cartReducer';
 
 const CartContext = createContext({
@@ -21,6 +22,10 @@ export function CartContextProvider({ children }) {
     dispatch({ type: ADD_ITEM, product, quantity });
   };
 
+  const setProductCountToCart = (product, quantity) => {
+    dispatch({ type: SET_ITEM_QUANTITY, product, quantity });
+  };
+
   const removeProductFromCart = (productId) => {
     dispatch({ type: REMOVE_ITEM, productId });
   };
@@ -33,6 +38,7 @@ export function CartContextProvider({ children }) {
     () => ({
       cart: cartState.cart,
       addProductToCart,
+      setProductCountToCart,
       removeProductFromCart,
       emptyCart,
     }),

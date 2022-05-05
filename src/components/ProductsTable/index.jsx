@@ -1,47 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyledTableProductInfo,
-  StyledTable,
-  StyledTableHead,
-  StyledCategoryImage,
-  StyledTableProductInfoDetails,
-} from './styled';
+import { StyledTableProductInfo, StyledTable, StyledTableHead } from './styled';
+import ProductsTableRow from './ProductsTableRow';
+import StyledButtonLink from '../StyledButtonLink';
 
 function ProductsTable({ products }) {
+  let total = 0;
   return (
     <StyledTable>
       <thead>
         <tr>
           <StyledTableHead>Product Details</StyledTableHead>
           <StyledTableHead>Quantity</StyledTableHead>
-          <StyledTableHead>Unit Price</StyledTableHead>
-          <StyledTableHead>Subtotal</StyledTableHead>
+          <StyledTableHead right>Unit Price</StyledTableHead>
+          <StyledTableHead right>Subtotal</StyledTableHead>
+          <StyledTableHead right>Actions</StyledTableHead>
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
-          <tr key={product.id}>
-            <StyledTableProductInfo>
-              <StyledTableProductInfoDetails>
-                <StyledCategoryImage
-                  src={product.data.mainimage?.url}
-                  alt={product.data.mainimage?.alt}
-                />
-                {product.data.name}
-              </StyledTableProductInfoDetails>
-            </StyledTableProductInfo>
-            <StyledTableProductInfo>{product.count}</StyledTableProductInfo>
-            <StyledTableProductInfo>
-              ${product.data.price}
-            </StyledTableProductInfo>
-            <StyledTableProductInfo>
-              ${product.data.price * product.count}
-            </StyledTableProductInfo>
-            <StyledTableProductInfo>Remove</StyledTableProductInfo>
-          </tr>
-        ))}
+        {products.map((product) => {
+          total += product.data.price * product.count;
+          return <ProductsTableRow key={product.id} product={product} />;
+        })}
       </tbody>
+      <tfoot>
+        <tr>
+          <StyledTableProductInfo colSpan={3} right bold>
+            Total
+          </StyledTableProductInfo>
+          <StyledTableProductInfo right bold>
+            ${total}
+          </StyledTableProductInfo>
+        </tr>
+        <tr>
+          <StyledTableProductInfo colSpan={4} right>
+            <StyledButtonLink to="/checkout" right="true">
+              Proceed to checkout
+            </StyledButtonLink>
+          </StyledTableProductInfo>
+        </tr>
+      </tfoot>
     </StyledTable>
   );
 }

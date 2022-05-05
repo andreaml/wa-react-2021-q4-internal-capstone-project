@@ -16,8 +16,6 @@ export const StyledWrapper = styled.div`
   padding: 20px 20px 50px 20px;
 
   @media ${device.tablet} {
-    grid-template-columns: 1fr 200px;
-    grid-template-rows: max-content 1fr;
     margin-top: 60px;
   }
 `;

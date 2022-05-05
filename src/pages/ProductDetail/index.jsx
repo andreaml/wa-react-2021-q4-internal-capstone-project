@@ -21,7 +21,7 @@ function ProductDetail() {
   const { data: product, isLoading: isLoadingProduct } = useSearchProducts({
     productId,
   });
-  const { cart, addProductToCart } = useCart();
+  const { cart, setProductCountToCart } = useCart();
   const currentProductInCart = cart.items.filter(
     (item) => item.id === productId
   )[0];
@@ -34,11 +34,18 @@ function ProductDetail() {
     return productInCartCount;
   });
 
-  const handleProductCountChange = (e) => {
-    setProductCount(Number(e.target.value));
-  };
-
   const { results: [productItem = {}] = [] } = product;
+
+  const handleProductCountChange = (e) => {
+    const newProductCount = Number(e.target.value);
+    if (newProductCount > productItem.data?.stock) {
+      setProductCount(productItem.data?.stock);
+    } else if (newProductCount <= 0) {
+      setProductCount(1);
+    } else {
+      setProductCount(newProductCount);
+    }
+  };
 
   return (
     <StyledWrapper isLoading={isLoadingProduct}>
@@ -75,7 +82,7 @@ function ProductDetail() {
               <StyledProductAddToCartInput
                 type="number"
                 name="quantity"
-                min={0}
+                min={1}
                 max={productItem.data?.stock}
                 inputmode="numeric"
                 value={productCount}
@@ -87,7 +94,7 @@ function ProductDetail() {
                 main
                 left
                 onClick={() => {
-                  addProductToCart(productItem, productCount);
+                  setProductCountToCart(productItem, productCount);
                 }}
                 disabled={productItem.data?.stock === 0}
               >

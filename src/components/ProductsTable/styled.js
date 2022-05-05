@@ -8,11 +8,35 @@ export const StyledTable = styled.table`
 `;
 
 export const StyledTableHead = styled.th`
-  text-align: left;
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
+`;
+
+export const StyledTableFoot = styled.tfoot`
+  text-align: right;
 `;
 
 export const StyledTableProductInfo = styled.td`
-  text-align: center;
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  padding: 5px 0;
+  text-align: ${({ right }) => (right ? 'right' : 'center')};
+`;
+
+export const StyledTrashButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${(props) => props.theme.main};
+  }
+
+  svg {
+    height: 23px;
+    margin: 0;
+    width: 23px;
+  }
 `;
 
 export const StyledTableProductInfoDetails = styled.div`
