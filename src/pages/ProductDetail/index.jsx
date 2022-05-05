@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ReactComponent as PlantIcon } from '../../assets/icons/plant.svg';
 import ProductGalleryGrid from '../../components/ProductGalleryGrid';
 import StyledButton from '../../components/StyledButton';
 import { useCart } from '../../utils/hooks/CartContext';
+import StyledButtonLink from '../../components/StyledButtonLink';
 import useSearchProducts from '../../utils/hooks/useSearchProducts';
 import {
   StyledWrapper,
@@ -14,11 +16,13 @@ import {
   StyledProductAddToCartWrapper,
   StyledProductAddToCartInput,
   StyledProductInfoSecondary,
+  StyledNoResults,
+  StyledNoResultsTitle,
 } from './styled';
 
 function ProductDetail() {
   const { productId } = useParams();
-  const { data: product, isLoading: isLoadingProduct } = useSearchProducts({
+  const { data: product, isLoading } = useSearchProducts({
     productId,
   });
   const { cart, setProductCountToCart } = useCart();
@@ -48,13 +52,23 @@ function ProductDetail() {
   };
 
   return (
-    <StyledWrapper isLoading={isLoadingProduct}>
-      {!isLoadingProduct && (
+    <StyledWrapper isLoading={isLoading}>
+      {!isLoading && product?.results?.length === 0 && (
+        <StyledNoResults>
+          <PlantIcon />
+          <StyledNoResultsTitle>Sorry</StyledNoResultsTitle>
+          <p>No product found with id &quot;{productId}&quot;</p>
+          <StyledButtonLink main center to="/products">
+            Go to Products
+          </StyledButtonLink>
+        </StyledNoResults>
+      )}
+      {!isLoading && product?.results?.length > 0 && (
         <>
           <StyledTitle>{productItem.data?.name}</StyledTitle>
           <ProductGalleryGrid
             images={productItem.data?.images || []}
-            isLoading={isLoadingProduct}
+            isLoading={isLoading}
           />
           <StyledProductInfoWrapper>
             <StyledProductInfo>SKU: {productItem.data?.sku}</StyledProductInfo>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useFeaturedBanners from '../../utils/hooks/useFeaturedBanners';
+import PropTypes from 'prop-types';
 import {
   StyledButtonsWrapper,
   StyledLoadingSlider,
@@ -10,28 +10,26 @@ import {
   StyledSlidesCounter,
 } from './styled';
 
-function Slider() {
-  const { data, isLoading } = useFeaturedBanners();
+function Slider({ featuredBanners, isLoading }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [currentSlide, setCurrentSlide] = useState({});
 
   useEffect(() => {
     if (!isLoading) {
-      const { results = [] } = data;
-      setCurrentSlide(results[currentSlideIndex]?.data || {});
+      setCurrentSlide(featuredBanners[currentSlideIndex]?.data || {});
     }
-  }, [currentSlideIndex, isLoading, data]);
+  }, [currentSlideIndex, isLoading, featuredBanners]);
 
   const goPrevSlide = () => {
     if (currentSlideIndex === 0) {
-      setCurrentSlideIndex(data.results.length - 1);
+      setCurrentSlideIndex(featuredBanners.length - 1);
     } else {
       setCurrentSlideIndex(currentSlideIndex - 1);
     }
   };
 
   const goNextSlide = () => {
-    if (currentSlideIndex === data.results.length - 1) {
+    if (currentSlideIndex === featuredBanners.length - 1) {
       setCurrentSlideIndex(0);
     } else {
       setCurrentSlideIndex(currentSlideIndex + 1);
@@ -58,11 +56,26 @@ function Slider() {
         </StyledSliderButton>
         <StyledSlidesCounter>
           {currentSlideIndex + 1}&nbsp;&nbsp;/&nbsp;&nbsp;
-          {data?.results?.length || '...'}{' '}
+          {featuredBanners.length || '...'}{' '}
         </StyledSlidesCounter>
       </StyledButtonsWrapper>
     </StyledSliderWrapper>
   );
 }
+
+Slider.propTypes = {
+  featuredBanners: PropTypes.arrayOf(
+    PropTypes.shape({
+      data: PropTypes.shape({
+        main_image: PropTypes.shape({
+          alt: PropTypes.string,
+          url: PropTypes.string,
+        }),
+        title: PropTypes.string,
+      }),
+    })
+  ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default Slider;
