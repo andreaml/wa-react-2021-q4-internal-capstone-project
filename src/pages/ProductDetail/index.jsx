@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ReactComponent as PlantIcon } from '../../assets/icons/plant.svg';
 import ProductGalleryGrid from '../../components/ProductGalleryGrid';
 import StyledButton from '../../components/StyledButton';
+import { useCart } from '../../utils/hooks/CartContext';
 import StyledButtonLink from '../../components/StyledButtonLink';
 import useSearchProducts from '../../utils/hooks/useSearchProducts';
 import {
@@ -24,13 +25,31 @@ function ProductDetail() {
   const { data: product, isLoading } = useSearchProducts({
     productId,
   });
-  const [productCount, setProductCount] = useState(1);
+  const { cart, setProductCountToCart } = useCart();
+  const currentProductInCart = cart.items.filter(
+    (item) => item.id === productId
+  )[0];
 
-  const handleProductCountChange = (e) => {
-    setProductCount(e.target.value);
-  };
+  const [productCount, setProductCount] = useState(() => {
+    let productInCartCount = 1;
+    if (currentProductInCart && currentProductInCart.count > 0) {
+      productInCartCount = currentProductInCart.count;
+    }
+    return productInCartCount;
+  });
 
   const { results: [productItem = {}] = [] } = product;
+
+  const handleProductCountChange = (e) => {
+    const newProductCount = Number(e.target.value);
+    if (newProductCount > productItem.data?.stock) {
+      setProductCount(productItem.data?.stock);
+    } else if (newProductCount <= 0) {
+      setProductCount(1);
+    } else {
+      setProductCount(newProductCount);
+    }
+  };
 
   return (
     <StyledWrapper isLoading={isLoading}>
@@ -77,7 +96,7 @@ function ProductDetail() {
               <StyledProductAddToCartInput
                 type="number"
                 name="quantity"
-                min={0}
+                min={1}
                 max={productItem.data?.stock}
                 inputmode="numeric"
                 value={productCount}
@@ -89,11 +108,11 @@ function ProductDetail() {
                 main
                 left
                 onClick={() => {
-                  // TODO add product to cart
+                  setProductCountToCart(productItem, productCount);
                 }}
                 disabled={productItem.data?.stock === 0}
               >
-                Add to Cart
+                {currentProductInCart ? 'Update Cart' : 'Add to Cart'}
               </StyledButton>
             </StyledProductAddToCartWrapper>
             <StyledProductInfoTable>

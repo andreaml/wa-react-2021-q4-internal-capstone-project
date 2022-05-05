@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Cart from './Cart';
+import Checkout from './Checkout';
 import Page404 from './404';
 import Homepage from './Homepage';
 import ProductDetail from './ProductDetail';
@@ -20,10 +22,9 @@ function Content() {
           path: 'product/:productId',
           element: <ProductDetail />,
         },
-        {
-          path: 'search',
-          element: <Search />,
-        },
+        { path: 'search', element: <Search /> },
+        { path: 'cart', element: <Cart /> },
+        { path: 'checkout', element: <Checkout /> },
         { path: '*', element: <Page404 /> },
       ],
     },

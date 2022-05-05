@@ -1,11 +1,17 @@
 import React from 'react';
 import { ReactComponent as ShoppingCartIcon } from '../../../assets/icons/shopping-cart.svg';
-import StyledButton from './styled';
+import { useCart } from '../../../utils/hooks/CartContext';
+import { StyledButton, StyledCartItemsBadge } from './styled';
 
 function ShoppingCartButton() {
+  const {
+    cart: { count },
+  } = useCart();
+
   return (
-    <StyledButton type="button">
+    <StyledButton to="cart" title="Cart">
       <ShoppingCartIcon />
+      {count > 0 && <StyledCartItemsBadge>{count}</StyledCartItemsBadge>}
     </StyledButton>
   );
 }
