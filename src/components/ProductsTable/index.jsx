@@ -4,23 +4,29 @@ import { StyledTableProductInfo, StyledTable, StyledTableHead } from './styled';
 import ProductsTableRow from './ProductsTableRow';
 import StyledButtonLink from '../StyledButtonLink';
 
-function ProductsTable({ products }) {
+function ProductsTable({ products, editable }) {
   let total = 0;
   return (
-    <StyledTable>
+    <StyledTable display={editable ? 'table' : 'block'}>
       <thead>
         <tr>
           <StyledTableHead>Product Details</StyledTableHead>
           <StyledTableHead>Quantity</StyledTableHead>
           <StyledTableHead right>Unit Price</StyledTableHead>
           <StyledTableHead right>Subtotal</StyledTableHead>
-          <StyledTableHead right>Actions</StyledTableHead>
+          {editable && <StyledTableHead right>Actions</StyledTableHead>}
         </tr>
       </thead>
       <tbody>
         {products.map((product) => {
           total += product.data.price * product.count;
-          return <ProductsTableRow key={product.id} product={product} />;
+          return (
+            <ProductsTableRow
+              key={product.id}
+              product={product}
+              editable={editable}
+            />
+          );
         })}
       </tbody>
       <tfoot>
@@ -32,13 +38,15 @@ function ProductsTable({ products }) {
             ${total}
           </StyledTableProductInfo>
         </tr>
-        <tr>
-          <StyledTableProductInfo colSpan={4} right>
-            <StyledButtonLink to="/checkout" right="true">
-              Proceed to checkout
-            </StyledButtonLink>
-          </StyledTableProductInfo>
-        </tr>
+        {editable && (
+          <tr>
+            <StyledTableProductInfo colSpan={4} right>
+              <StyledButtonLink to="/checkout" right="true">
+                Proceed to checkout
+              </StyledButtonLink>
+            </StyledTableProductInfo>
+          </tr>
+        )}
       </tfoot>
     </StyledTable>
   );
@@ -64,6 +72,11 @@ ProductsTable.propTypes = {
       }),
     })
   ).isRequired,
+  editable: PropTypes.bool,
+};
+
+ProductsTable.defaultProps = {
+  editable: false,
 };
 
 export default ProductsTable;

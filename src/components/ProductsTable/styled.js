@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-// import device from '../../utils/scss/mediaQueries';
 import LoadingBackgroundAnimation from '../../utils/scss/scssMixins';
 
 export const StyledTable = styled.table`
+  display: ${({ display }) => display || 'table'};
   grid-area: productsTable;
+  max-width: 100%;
+  overflow-x: auto;
   width: 100%;
 `;
 
 export const StyledTableHead = styled.th`
+  padding: 0 5px;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
 `;
 
@@ -43,6 +46,7 @@ export const StyledTableProductInfoDetails = styled.div`
   align-items: center;
   column-gap: 20px;
   display: flex;
+  text-align: left;
 `;
 
 export const StyledCategoryImage = styled.img`

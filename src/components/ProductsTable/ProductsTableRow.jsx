@@ -11,7 +11,7 @@ import { StyledProductAddToCartInput } from '../../pages/ProductDetail/styled';
 import { useCart } from '../../utils/hooks/CartContext';
 import { StyledLink } from '../StyledLinks.styled';
 
-function ProductsTableRow({ product }) {
+function ProductsTableRow({ product, editable }) {
   const { removeProductFromCart, setProductCountToCart } = useCart();
   const [productCount, setProductCount] = useState(product.count);
 
@@ -45,15 +45,18 @@ function ProductsTableRow({ product }) {
         </StyledTableProductInfoDetails>
       </StyledTableProductInfo>
       <StyledTableProductInfo>
-        <StyledProductAddToCartInput
-          type="number"
-          name="quantity"
-          min={1}
-          max={product.data.stock}
-          inputmode="numeric"
-          value={productCount}
-          onChange={handleProductCountChange}
-        />
+        {editable && (
+          <StyledProductAddToCartInput
+            type="number"
+            name="quantity"
+            min={1}
+            max={product.data.stock}
+            inputmode="numeric"
+            value={productCount}
+            onChange={handleProductCountChange}
+          />
+        )}
+        {!editable && productCount}
       </StyledTableProductInfo>
       <StyledTableProductInfo right>
         ${product.data.price}
@@ -61,17 +64,19 @@ function ProductsTableRow({ product }) {
       <StyledTableProductInfo right>
         ${product.data.price * productCount}
       </StyledTableProductInfo>
-      <StyledTableProductInfo right>
-        <StyledTrashButton
-          type="button"
-          onClick={() => {
-            removeProductFromCart(product.id);
-          }}
-          title="Remove product"
-        >
-          <TrashIcon />
-        </StyledTrashButton>
-      </StyledTableProductInfo>
+      {editable && (
+        <StyledTableProductInfo right>
+          <StyledTrashButton
+            type="button"
+            onClick={() => {
+              removeProductFromCart(product.id);
+            }}
+            title="Remove product"
+          >
+            <TrashIcon />
+          </StyledTrashButton>
+        </StyledTableProductInfo>
+      )}
     </tr>
   );
 }
@@ -90,6 +95,11 @@ ProductsTableRow.propTypes = {
     }),
     count: PropTypes.number,
   }).isRequired,
+  editable: PropTypes.bool,
+};
+
+ProductsTableRow.defaultProps = {
+  editable: false,
 };
 
 export default ProductsTableRow;

@@ -1,19 +1,18 @@
 import React from 'react';
+import CheckoutForm from '../../components/CheckoutForm';
 import ProductsTable from '../../components/ProductsTable';
 import { useCart } from '../../utils/hooks/CartContext';
 import { StyledWrapper, StyledTitle } from './styled';
 
-function Cart() {
+function Checkout() {
   const { cart } = useCart();
   return (
     <StyledWrapper>
-      <StyledTitle>
-        Shopping Cart
-        <span>{cart.count} Items</span>
-      </StyledTitle>
-      <ProductsTable products={cart.items} editable />
+      <StyledTitle>Checkout</StyledTitle>
+      <ProductsTable products={cart.items} />
+      <CheckoutForm />
     </StyledWrapper>
   );
 }
 
-export default Cart;
+export default Checkout;
