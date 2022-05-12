@@ -22,7 +22,9 @@ function CategoriesGrid({ categories, isLoading }) {
               to={`/products?category=${encodeURIComponent(data.name)}`}
               title={data.name}
             >
-              <StyledCategoryName>{data.name}</StyledCategoryName>
+              <StyledCategoryName data-testid="categoryName">
+                {data.name}
+              </StyledCategoryName>
               <StyledCategoryImage
                 src={data.main_image?.url}
                 alt={data.main_image?.alt}

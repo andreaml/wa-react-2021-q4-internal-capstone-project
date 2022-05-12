@@ -9,6 +9,8 @@ function useProducts({ productTags = [], page = 1, pageSize = 16 }) {
     isLoading: true,
   }));
 
+  let isMounted = true;
+
   const productTagsQueryParams = productTags
     .map(
       (productTag) =>
@@ -35,10 +37,13 @@ function useProducts({ productTags = [], page = 1, pageSize = 16 }) {
           }
         );
         const data = await response.json();
-
-        setProducts({ data, isLoading: false });
+        if (isMounted) {
+          setProducts({ data, isLoading: false });
+        }
       } catch (err) {
-        setProducts({ data: {}, isLoading: false });
+        if (isMounted) {
+          setProducts({ data: {}, isLoading: false });
+        }
         // eslint-disable-next-line no-console
         console.error(err);
       }
@@ -48,6 +53,7 @@ function useProducts({ productTags = [], page = 1, pageSize = 16 }) {
 
     return () => {
       controller.abort();
+      isMounted = false;
     };
   }, [apiRef, isApiMetadataLoading, page]);
 

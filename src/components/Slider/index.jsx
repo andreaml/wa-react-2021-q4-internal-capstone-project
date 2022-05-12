@@ -44,7 +44,9 @@ function Slider({ featuredBanners, isLoading }) {
         src={currentSlide.main_image?.url}
         alt={currentSlide.main_image?.alt}
       />
-      <StyledSliderTitle>{currentSlide.title}</StyledSliderTitle>
+      <StyledSliderTitle data-testid="slideTitle">
+        {currentSlide.title}
+      </StyledSliderTitle>
       <StyledButtonsWrapper>
         <StyledSliderButton type="button" left onClick={goPrevSlide}>
           {' '}
@@ -54,7 +56,7 @@ function Slider({ featuredBanners, isLoading }) {
           {' '}
           &gt;{' '}
         </StyledSliderButton>
-        <StyledSlidesCounter>
+        <StyledSlidesCounter data-testid="slidesCounter">
           {currentSlideIndex + 1}&nbsp;&nbsp;/&nbsp;&nbsp;
           {featuredBanners.length || '...'}{' '}
         </StyledSlidesCounter>
