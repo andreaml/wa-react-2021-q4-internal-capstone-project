@@ -32,6 +32,22 @@ const handlers = [
           pageSize * page - pageSize,
           pageSize * page
         );
+      } else if (queries.includes('[[fulltext(document, ""tallulah"")]]')) {
+        jsonToReturn = product;
+      } else if (queries.includes('[[fulltext(document, ""pot"")]]')) {
+        jsonToReturn = {
+          license:
+            'This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.',
+          next_page: null,
+          page: 1,
+          prev_page: null,
+          results: [],
+          results_per_page: 20,
+          results_size: 0,
+          total_pages: 0,
+          total_results_size: 0,
+          version: '6dac34e',
+        };
       } else {
         jsonToReturn = products;
         const currentResults = jsonToReturn.default

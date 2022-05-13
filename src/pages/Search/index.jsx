@@ -27,7 +27,7 @@ function Search() {
     <StyledSearch>
       <StyledTitle>Products search</StyledTitle>
       {!isLoadingProducts && (
-        <StyledHeadline>
+        <StyledHeadline data-testid="searchDescription">
           Results found with the terms &quot;{searchTerm}&quot;
         </StyledHeadline>
       )}
