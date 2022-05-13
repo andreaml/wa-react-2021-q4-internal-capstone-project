@@ -16,8 +16,10 @@ function Pagination({ page, totalPages, setPage }) {
     for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
       pagesButtonsArray.push(
         <StyledPaginationButton
+          data-testid="paginationButtonNumber"
           key={`pagination-button-${pageNumber}`}
           type="button"
+          className={page === pageNumber ? 'active' : ''}
           activePage={page === pageNumber}
           onClick={() => {
             navigateToPage(pageNumber);
@@ -34,6 +36,7 @@ function Pagination({ page, totalPages, setPage }) {
   return (
     <StyledWrapper>
       <StyledNavigationButton
+        data-testid="paginationButtonPrev"
         type="button"
         title="Previous"
         disabled={totalPages === 1 || page === 1}
@@ -46,6 +49,7 @@ function Pagination({ page, totalPages, setPage }) {
       </StyledNavigationButton>
       {generatePagesButtons()}
       <StyledNavigationButton
+        data-testid="paginationButtonNext"
         type="button"
         title="Next"
         disabled={page === totalPages}

@@ -12,7 +12,7 @@ function Homepage() {
   const { data: productCategories, isLoading: isLoadingProductCategories } =
     useProductCategories();
   const { data: featuredProducts, isLoading: isLoadingFeaturedProducts } =
-    useProducts({ tags: ['Featured'] });
+    useProducts({ productTags: ['Featured'] });
 
   return (
     <div>

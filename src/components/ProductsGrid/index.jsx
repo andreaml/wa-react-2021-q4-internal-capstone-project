@@ -23,7 +23,7 @@ function ProductsGrid({
         cardsTemplateColumns={cardsTemplateColumns}
       >
         {!isLoading && products.length === 0 && (
-          <StyledNoResults>
+          <StyledNoResults data-testid="noResults">
             <PlantIcon />
             <StyledNoResultsTitle>Sorry</StyledNoResultsTitle>
             <p>{notFoundMessage}</p>

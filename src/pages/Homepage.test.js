@@ -28,6 +28,6 @@ describe('Homepage', () => {
   it('should render the Featured Products Grid', async () => {
     setup();
     const productCards = await screen.findAllByTestId('productCard');
-    expect(productCards).toHaveLength(29);
+    expect(productCards).toHaveLength(16);
   });
 });
