@@ -5,6 +5,7 @@ import * as featuredBanners from './en-us/featured-banners.json';
 import * as productCategories from './en-us/product-categories.json';
 import * as featuredProducts from './en-us/featured-products.json';
 import * as products from './en-us/products.json';
+import * as product from './en-us/product.json';
 
 const handlers = [
   rest.get(API_BASE_URL, (req, res, ctx) =>
@@ -45,6 +46,15 @@ const handlers = [
       jsonToReturn.total_pages = 3;
       jsonToReturn.results_per_page = pageSize;
       jsonToReturn.results_size = pageSize;
+    } else if (
+      documentType.includes('[[:d=at(document.id, "YWL8XBIAAC0AzuPZ") ]]')
+    ) {
+      jsonToReturn = product;
+    } else if (
+      documentType.includes('[[:d=at(document.id, "YWL8XBIAAC0AzuP0") ]]')
+    ) {
+      jsonToReturn = product;
+      jsonToReturn.results[0].data.stock = 0;
     }
     return res(ctx.status(200), ctx.json(jsonToReturn));
   }),

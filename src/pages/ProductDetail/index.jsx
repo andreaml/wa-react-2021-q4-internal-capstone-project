@@ -26,7 +26,7 @@ function ProductDetail() {
     productId,
   });
   const { cart, setProductCountToCart } = useCart();
-  const currentProductInCart = cart.items.filter(
+  const currentProductInCart = cart.items?.filter(
     (item) => item.id === productId
   )[0];
 
@@ -78,7 +78,7 @@ function ProductDetail() {
                 {productItem.data?.stock > 0 ? 'On stock' : 'Sold out'}
               </StyledProductInfoSecondary>
             </StyledProductInfo>
-            <StyledProductInfo>
+            <StyledProductInfo data-testid="productCategory">
               Category: {productItem.data?.category.slug}
             </StyledProductInfo>
             <StyledProductInfo>
@@ -87,7 +87,10 @@ function ProductDetail() {
             <StyledProductInfo>
               Tags:
               {productItem.tags?.map((tag) => (
-                <StyledProductInfoTag key={`${productId}-tag-${tag}`}>
+                <StyledProductInfoTag
+                  key={`${productId}-tag-${tag}`}
+                  data-testid="productTag"
+                >
                   {tag}
                 </StyledProductInfoTag>
               ))}
