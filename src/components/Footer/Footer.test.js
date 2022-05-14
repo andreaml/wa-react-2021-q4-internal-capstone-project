@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Footer from '.';
+import { renderWithRouter } from '../../test.utils';
 
-test('footer logo image loads', () => {
-  render(<Footer />);
-  const logoImage = screen.getByAltText('Deco Choice');
-  expect(logoImage).toHaveAttribute('src', 'logo.png');
+describe('Footer', () => {
+  it('should load the logo image', () => {
+    renderWithRouter(<Footer />);
+
+    const logoImage = screen.getByAltText('Deco Choice');
+    expect(logoImage).toHaveAttribute('src', 'logo.png');
+  });
 });

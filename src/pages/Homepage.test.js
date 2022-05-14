@@ -1,14 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { screen } from '@testing-library/react';
 import Homepage from './Homepage';
+import { renderWithRouter } from '../test.utils';
 
-const setup = () =>
-  render(
-    <Router>
-      <Homepage />
-    </Router>
-  );
+const setup = () => renderWithRouter(<Homepage />);
 
 describe('Homepage', () => {
   it('should render the FeatureBanners Slider', async () => {
