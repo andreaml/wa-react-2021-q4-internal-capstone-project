@@ -34,8 +34,8 @@ function ProductsTable({ products, editable }) {
           <StyledTableProductInfo colSpan={3} right bold>
             Total
           </StyledTableProductInfo>
-          <StyledTableProductInfo right bold>
-            ${total}
+          <StyledTableProductInfo data-testid="cartTotal" right bold>
+            ${total.toFixed()}
           </StyledTableProductInfo>
         </tr>
         {editable && (

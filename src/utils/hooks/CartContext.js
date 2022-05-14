@@ -15,8 +15,11 @@ const CartContext = createContext({
   removeItemFromCart: () => {},
 });
 
-export function CartContextProvider({ children }) {
-  const [cartState, dispatch] = useReducer(cartReducer, cartInitialState);
+export function CartContextProvider({ children, cartCustomInitialState }) {
+  const [cartState, dispatch] = useReducer(
+    cartReducer,
+    cartCustomInitialState || cartInitialState
+  );
 
   const addProductToCart = (product, quantity) => {
     dispatch({ type: ADD_ITEM, product, quantity });
@@ -54,6 +57,34 @@ export function CartContextProvider({ children }) {
 
 CartContextProvider.propTypes = {
   children: PropTypes.instanceOf(Object).isRequired,
+  cartCustomInitialState: PropTypes.shape({
+    cart: PropTypes.shape({
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          data: PropTypes.shape({
+            sku: PropTypes.string,
+            category: PropTypes.shape({
+              name: PropTypes.string,
+              slug: PropTypes.string,
+            }),
+            name: PropTypes.string,
+            mainimage: PropTypes.shape({
+              alt: PropTypes.string,
+              url: PropTypes.string,
+            }),
+            price: PropTypes.number,
+            short_description: PropTypes.string,
+          }),
+        })
+      ),
+      count: PropTypes.number,
+    }),
+  }),
+};
+
+CartContextProvider.defaultProps = {
+  cartCustomInitialState: null,
 };
 
 export const useCart = () => {

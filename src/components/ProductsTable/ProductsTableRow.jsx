@@ -32,7 +32,7 @@ function ProductsTableRow({ product, editable }) {
     }
   }, [productCount]);
   return (
-    <tr key={product.id}>
+    <tr key={product.id} data-testid="cartProductTableRow">
       <StyledTableProductInfo>
         <StyledTableProductInfoDetails>
           <StyledCategoryImage
@@ -58,11 +58,11 @@ function ProductsTableRow({ product, editable }) {
         )}
         {!editable && productCount}
       </StyledTableProductInfo>
-      <StyledTableProductInfo right>
+      <StyledTableProductInfo data-testid="productPrice" right>
         ${product.data.price}
       </StyledTableProductInfo>
-      <StyledTableProductInfo right>
-        ${product.data.price * productCount}
+      <StyledTableProductInfo data-testid="productSubtotal" right>
+        ${(product.data.price * productCount).toFixed()}
       </StyledTableProductInfo>
       {editable && (
         <StyledTableProductInfo right>

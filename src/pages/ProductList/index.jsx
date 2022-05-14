@@ -36,7 +36,7 @@ function ProductList() {
 
   return (
     <StyledProductList>
-      <StyledTitle>Products catalog</StyledTitle>
+      <StyledTitle data-testid="productListTitle">Products catalog</StyledTitle>
       <Sidebar
         productCategories={mappedCategories}
         isLoading={isLoadingProductCategories}
