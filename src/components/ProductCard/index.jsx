@@ -27,7 +27,7 @@ function ProductCard({ product, showDescription }) {
 
   const { addProductToCart } = useCart();
   return (
-    <StyledProductWrapper title={name}>
+    <StyledProductWrapper data-testid="productCard" title={name}>
       <Link to={`/product/${productId}`} className="link-image">
         <StyledCategoryImage src={mainimage?.url} alt={mainimage?.alt} />
         <StyledProductName>{name}</StyledProductName>

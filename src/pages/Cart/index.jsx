@@ -9,7 +9,7 @@ function Cart() {
     <StyledWrapper>
       <StyledTitle>
         Shopping Cart
-        <span>{cart.count} Items</span>
+        <span data-testid="cartTitleCount">{cart.count} Items</span>
       </StyledTitle>
       <ProductsTable products={cart.items} editable />
     </StyledWrapper>

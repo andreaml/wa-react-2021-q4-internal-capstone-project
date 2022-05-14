@@ -1,10 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Header from '.';
+import { renderWithRouter } from '../../test.utils';
 
-test('header logo image loads', () => {
-  render(<Header />);
+describe('Header', () => {
+  it('should load the logo image', () => {
+    renderWithRouter(<Header />);
 
-  const logoImage = screen.getByAltText('Deco Choice');
-  expect(logoImage).toHaveAttribute('src', 'logo.png');
+    const logoImage = screen.getByAltText('Deco Choice');
+    expect(logoImage).toHaveAttribute('src', 'logo.png');
+  });
 });

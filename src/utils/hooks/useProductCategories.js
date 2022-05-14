@@ -8,6 +8,7 @@ function useProductCategories() {
     data: {},
     isLoading: true,
   }));
+  let isMounted = true;
 
   useEffect(() => {
     if (!apiRef || isApiMetadataLoading) {
@@ -29,9 +30,13 @@ function useProductCategories() {
         );
         const data = await response.json();
 
-        setProductCategories({ data, isLoading: false });
+        if (isMounted) {
+          setProductCategories({ data, isLoading: false });
+        }
       } catch (err) {
-        setProductCategories({ data: {}, isLoading: false });
+        if (isMounted) {
+          setProductCategories({ data: {}, isLoading: false });
+        }
         // eslint-disable-next-line no-console
         console.error(err);
       }
@@ -41,6 +46,7 @@ function useProductCategories() {
 
     return () => {
       controller.abort();
+      isMounted = false;
     };
   }, [apiRef, isApiMetadataLoading]);
 

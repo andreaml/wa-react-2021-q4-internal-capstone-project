@@ -43,10 +43,11 @@ function Sidebar({
         </StyledFilterTitle>
         <StyledSidebarItemsWrapper>
           {productCategories.map(({ id, data, active, productCount }) => (
-            <li key={id}>
+            <li data-testid="categoryItem" key={id}>
               <StyledSidebarItemSelector checked={active}>
                 <input
                   name="categoryFilters"
+                  data-testid="categoryItemFilter"
                   type="checkbox"
                   value={id}
                   checked={active}
